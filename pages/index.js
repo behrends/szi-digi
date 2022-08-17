@@ -1,10 +1,8 @@
 import Head from 'next/head';
-import Image from 'next/image';
-import styles from '../styles/Home.module.css';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div className="px-6">
       <Head>
         <title>SZI digi</title>
         <meta
@@ -14,14 +12,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
+      <main className="flex flex-col justify-center items-center min-h-screen py-6">
+        <h1 className="text-dhbwRed text-6xl">
           Digitalisierte Prozesse am SZI der DHBW Lörrach
         </h1>
       </main>
 
-      <footer className={styles.footer}>
+      <footer className="flex justify-center items-center border-t border-slate-200 py-6">
         <a
+          className="text-dhbwRed"
           href="https://www.dhbw-loerrach.de"
           target="_blank"
           rel="noopener noreferrer"

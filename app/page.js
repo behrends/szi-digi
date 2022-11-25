@@ -61,12 +61,12 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex flex-row w-full">
-          <div className="flex justify-center items-center text-sm mr-5">
-            Bedeutung der Farben:
+        <div className="flex flex-col w-full justify-end items-end">
+          <div className="flex justify-center items-center text-sm mb-3">
+            Farben entsprechen der Phasen:
           </div>
           <div
-            className={`h-10 p-2 card justify-center items-center shadow-xl mr-5 ${theoryPhaseColors}`}
+            className={`h-10 p-2 card justify-center items-center shadow-xl mb-3 ${theoryPhaseColors}`}
           >
             <div className="text-xs font-bold">
               Theoriephase an der DHBW Lörrach

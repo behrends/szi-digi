@@ -1,3 +1,31 @@
-export default function Course({ params }) {
-  return <h1>{params.course}</h1>;
+import { notFound } from 'next/navigation';
+
+async function fetchCourse(name) {
+  let response = await fetch(
+    `https://my-json-server.typicode.com/behrends/szi-digi/courses?name=${name}`
+  );
+  // TODO: better error handling instead of returning undefined
+  // --> e.g. throw and handle error in case of network error
+  if (!response.ok) return undefined;
+  const courseArray = await response.json();
+
+  // no course found
+  if (courseArray.length === 0) return undefined;
+  return courseArray[0];
+}
+
+export default async function Course({ params }) {
+  const courseName = params.course;
+  const course = await fetchCourse(courseName);
+
+  // this will show the 404 page
+  if (!course) notFound(); // implicit return
+
+  return (
+    <>
+      <h1>{course.name}</h1>
+      <p>Id: {course.id}</p>
+      <p>Semester: {course.semester}</p>
+    </>
+  );
 }

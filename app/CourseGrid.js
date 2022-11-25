@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 // TODO: is there a better location for stuff like this?
 export const theoryColors =
   'text-dhbwRed hover:text-white bg-red-300 hover:bg-red-500';
@@ -11,11 +13,13 @@ export default function CourseGrid({ courses }) {
         const phaseColors =
           course.phase === 'theory' ? theoryColors : practiceColors;
         return (
-          <div
-            className={`h-20 card justify-center items-center shadow-xl cursor-pointer ${phaseColors}`}
-          >
-            <h2 className="card-title">{course.name}</h2>
-          </div>
+          <Link href={`/courses/${course.name}`} key={course.name}>
+            <div
+              className={`h-20 card justify-center items-center shadow-xl cursor-pointer ${phaseColors}`}
+            >
+              <h2 className="card-title">{course.name}</h2>
+            </div>
+          </Link>
         );
       })}
     </div>

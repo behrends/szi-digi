@@ -1,6 +1,15 @@
 import { notFound } from 'next/navigation';
 
 async function fetchCourse(name) {
+  // TODO replace with real fetch (from supabase?)
+  const data = require('/db.json');
+  const courseList = data.courses.filter(
+    (course) => course.name === name
+  );
+  if (courseList.length === 0) return undefined;
+  console.log(courseList[0]);
+  return courseList[0];
+  /*
   let response = await fetch(
     `https://my-json-server.typicode.com/behrends/szi-digi/courses?name=${name}`
   );
@@ -12,6 +21,7 @@ async function fetchCourse(name) {
   // no course found
   if (courseArray.length === 0) return undefined;
   return courseArray[0];
+  */
 }
 
 export default async function Course({ params }) {

@@ -1,0 +1,19 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "name": "TIF20A",
+      "semester": 5
+    },
+    {
+      "id": 2,
+      "name": "TIF21A",
+      "semester": 3
+    },
+    {
+      "id": 3,
+      "name": "TIF21B",
+      "semester": 3
+    }
+  ]
+}

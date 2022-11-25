@@ -7,7 +7,6 @@ async function fetchCourse(name) {
     (course) => course.name === name
   );
   if (courseList.length === 0) return undefined;
-  console.log(courseList[0]);
   return courseList[0];
   /*
   let response = await fetch(

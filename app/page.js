@@ -2,8 +2,8 @@ export default function Home() {
   return (
     <div className="px-6">
       <main className="flex flex-col justify-center items-center min-h-screen py-6">
-        <h1 className="text-dhbwRed text-6xl">
-          Digitalisierte Prozesse am SZI der DHBW Lörrach
+        <h1 className="text-dhbwRed text-4xl">
+          Block- und Studienpläne am SZI der DHBW Lörrach
         </h1>
 
         <div className="card w-48 bg-base-100 shadow-xl">

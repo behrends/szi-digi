@@ -8,7 +8,7 @@ export default function Head() {
       />
       <meta
         name="description"
-        content="Digitalisierte Prozesse am SZI der DHBW Lörrach"
+        content="Blockpläne und Studienpläne am Studienzentrum Informatik und IT-Management (SZI) der Dualen Hochschule Baden-Württemberg Lörrach (DHBW Lörrach)"
       />
       <link rel="icon" href="/favicon.ico" />
     </>

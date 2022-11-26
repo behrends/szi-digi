@@ -35,6 +35,15 @@ export default async function Course({ params }) {
       <h1>{course.name}</h1>
       <p>Id: {course.id}</p>
       <p>Semester: {course.semester}</p>
+      <p>
+        <a
+          className="text-dhbwRed"
+          href={`https://webmail.dhbw-loerrach.de/owa/calendar/kal-${course.name.toLowerCase()}@dhbw-loerrach.de/Kalender/calendar.html`}
+          target="_blank"
+        >
+          Vorlesungskalender
+        </a>
+      </p>
     </>
   );
 }

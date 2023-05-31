@@ -2,7 +2,7 @@ import { sql } from '@vercel/postgres';
 import CourseGrid, {
   theoryColors,
   practiceColors,
-} from './CourseGrid';
+} from '@/components/CourseGrid';
 
 export default async function Home() {
   // fetch data from Postgres (using Vercel's storage)

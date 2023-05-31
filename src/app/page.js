@@ -60,7 +60,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          &copy; 2022 DHBW Lörrach
+          &copy; 2023 DHBW Lörrach
         </a>
       </footer>
     </div>

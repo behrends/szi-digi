@@ -1,9 +1,29 @@
+import { sql } from '@vercel/postgres';
 import CourseGrid, {
   theoryColors,
   practiceColors,
 } from './CourseGrid';
 
-export default function Home() {
+export default async function Home() {
+  // fetch data from Postgres (using Vercel's storage)
+  const { rows } = await sql`SELECT * FROM courses`;
+
+  const coursesTIF = rows
+    .filter((course) => course.name.startsWith('TIF'))
+    .map((course) => ({
+      name: course.name,
+      phase:
+        Math.floor(Math.random() * 10) < 5 ? 'practice' : 'theory',
+    }));
+
+  const coursesWWI = rows
+    .filter((course) => course.name.startsWith('WWI'))
+    .map((course) => ({
+      name: course.name,
+      phase:
+        Math.floor(Math.random() * 10) < 5 ? 'practice' : 'theory',
+    }));
+
   return (
     <div className="px-6">
       <main className="flex flex-col justify-around items-center min-h-screen py-6">
@@ -12,24 +32,9 @@ export default function Home() {
         </h1>
 
         <div className="w-full">
-          <CourseGrid
-            courses={[
-              { name: 'TIF20A', phase: 'theory' },
-              { name: 'TIF21A', phase: 'theory' },
-              { name: 'TIF21B', phase: 'theory' },
-              { name: 'TIF22A', phase: 'theory' },
-              { name: 'TIF22B', phase: 'practice' },
-            ]}
-          />
+          <CourseGrid courses={coursesTIF} />
 
-          <CourseGrid
-            courses={[
-              { name: 'WWI20A', phase: 'practice' },
-              { name: 'WWI21A', phase: 'theory' },
-              { name: 'WWI22A', phase: 'theory' },
-              { name: 'WWI22B', phase: 'practice' },
-            ]}
-          />
+          <CourseGrid courses={coursesWWI} />
         </div>
 
         <div className="flex flex-col w-full justify-end items-end">

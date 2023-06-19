@@ -28,7 +28,7 @@ export default async function Home() {
     <div className="px-6">
       <main className="flex flex-col justify-around items-center min-h-screen py-6">
         <h1 className="text-dhbwGrey text-4xl mb-10">
-          Block- und Studienpläne am SZI der DHBW Lörrach
+          Infos zu den Kursen am SZI der DHBW Lörrach
         </h1>
 
         <div className="w-full">

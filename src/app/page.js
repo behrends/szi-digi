@@ -42,14 +42,14 @@ export default async function Home() {
             Farben zeigen die aktuelle Phase:
           </div>
           <div
-            className={`h-10 p-2 card justify-center items-center shadow-xl mb-3 ${theoryColors}`}
+            className={`h-10 p-2 card justify-center items-center shadow-xl mb-3 ${theoryColors} pointer-events-none`}
           >
             <div className="text-xs font-bold">
               Theoriephase an der DHBW Lörrach
             </div>
           </div>
           <div
-            className={`h-10 p-2 card justify-center items-center shadow-xl ${practiceColors}`}
+            className={`h-10 p-2 card justify-center items-center shadow-xl ${practiceColors} pointer-events-none`}
           >
             <div className="text-xs font-bold">
               Praxisphase im Unternehmen

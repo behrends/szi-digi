@@ -32,7 +32,10 @@ export default async function Course({ params }) {
           Vorlesungskalender öffnen (externer Link)
         </a>
       </p>
-      <div className="text-red-900">TODO: weitere Infos anzeigen</div>
+      <div className="text-red-900">
+        TODO: ➔ weitere nützliche Infos (z.B. Semester, Phase,
+        Termine) und Blockplan/Studienplan anzeigen
+      </div>
     </>
   );
 }

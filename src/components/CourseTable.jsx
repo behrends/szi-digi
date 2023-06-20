@@ -18,7 +18,7 @@ export default function CourseTable({ data }) {
           <>
             <tr key={item.semester}>
               <td
-                className="text-lg font-medium text-center py-1"
+                className="text-lg font-medium text-center text-dhbwGrey py-1"
                 colSpan="2"
               >
                 {item.semester}. Semester

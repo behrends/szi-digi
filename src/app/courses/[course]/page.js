@@ -18,13 +18,15 @@ export default async function Course({ params }) {
   // this will show the 404 page
   if (!course) notFound(); // implicit return
 
+  const courseCalName = course.exchange_name ?? course.name;
+
   return (
     <>
       <h1 className="text-4xl">{course.name}</h1>
       <p>
         <a
           className="text-dhbwRed"
-          href={`https://webmail.dhbw-loerrach.de/owa/calendar/kal-${course.name.toLowerCase()}@dhbw-loerrach.de/Kalender/calendar.html`}
+          href={`https://webmail.dhbw-loerrach.de/owa/calendar/kal-${courseCalName.toLowerCase()}@dhbw-loerrach.de/Kalender/calendar.html`}
           target="_blank"
         >
           Vorlesungskalender öffnen (externer Link)

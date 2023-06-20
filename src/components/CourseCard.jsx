@@ -6,7 +6,7 @@ export default function CourseCard({ course, color, showDates }) {
   return (
     <Link href={`/courses/${course.name}`} key={course.name}>
       <div
-        className={`card p-2 mb-2 justify-center items-start shadow-xl cursor-pointer border-2 border-${color} text-${color} ${hoverColor}`}
+        className={`card p-2 mb-2 justify-center items-start shadow-xl cursor-pointer border-2 text-${color} ${hoverColor}`}
       >
         <div className="card-title">{course.name}</div>
         {showDates && (

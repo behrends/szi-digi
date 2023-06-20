@@ -9,18 +9,18 @@ export default async function Home() {
 
   return (
     <div className="px-6">
-      <main className="flex flex-col justify-around items-center min-h-screen py-6">
+      <main className="flex flex-col justify-start items-center min-h-screen py-6">
         <h1 className="text-dhbwGrey text-4xl mb-10">
           Infos zu den Kursen am SZI der DHBW Lörrach
         </h1>
-
-        <div className="flex items-center">
+        <div className="flex flex-col w-full items-center">
           <label htmlFor="semester" className="font-medium mr-2">
             Zeige Kurse mit ihren Phasen in diesem Quartal:
           </label>
           <select id="semester" className="select select-bordered">
             <option selected>
-              Q223・April-Juni 2023・Sommersemester
+              Q223・April-Juni 2023・Sommersemester (aktuelles
+              Quartal)
             </option>
             <option>Q323・Juli-September 2023・Sommersemester</option>
             <option>
@@ -31,6 +31,7 @@ export default async function Home() {
             <option>Q324・Juli-September 2024・Sommersemester</option>
           </select>
         </div>
+
         <CourseTable data={coursesBySemester} />
       </main>
     </div>

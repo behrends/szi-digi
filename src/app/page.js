@@ -16,7 +16,7 @@ export default async function Home() {
 
         <div className="flex items-center">
           <label htmlFor="semester" className="font-medium mr-2">
-            Zeige Phasen der Kurse in diesem Quartal:
+            Zeige Kurse mit ihren Phasen in diesem Quartal:
           </label>
           <select id="semester" className="select select-bordered">
             <option selected>

@@ -5,7 +5,6 @@ export default function CourseTable({ data }) {
     <table className="table-lg">
       <thead>
         <tr>
-          <th className="text-xl">Semester</th>
           <th className="text-3xl text-dhbwRed">
             DHBW Lörrach (Theorie)
           </th>
@@ -16,27 +15,36 @@ export default function CourseTable({ data }) {
       </thead>
       <tbody>
         {data.map((item) => (
-          <tr key={item.semester}>
-            <td className="text-xl font-bold">{item.semester}</td>
-            <td>
-              {item.theory.map((course) => (
-                <CourseCard
-                  key={course.name}
-                  course={course}
-                  color="dhbwRed"
-                />
-              ))}
-            </td>
-            <td>
-              {item.practice.map((course) => (
-                <CourseCard
-                  key={course.name}
-                  course={course}
-                  color="dhbwGrey"
-                />
-              ))}
-            </td>
-          </tr>
+          <>
+            <tr key={item.semester}>
+              <td
+                className="text-lg font-medium text-center py-1"
+                colSpan="2"
+              >
+                {item.semester}. Semester
+              </td>
+            </tr>
+            <tr key={item.semester}>
+              <td className="align-top pt-1">
+                {item.theory.map((course) => (
+                  <CourseCard
+                    key={course.name}
+                    course={course}
+                    color="dhbwRed"
+                  />
+                ))}
+              </td>
+              <td className="align-top pt-1">
+                {item.practice.map((course) => (
+                  <CourseCard
+                    key={course.name}
+                    course={course}
+                    color="dhbwGrey"
+                  />
+                ))}
+              </td>
+            </tr>
+          </>
         ))}
       </tbody>
     </table>

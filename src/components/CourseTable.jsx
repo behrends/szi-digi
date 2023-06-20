@@ -5,7 +5,7 @@ import CourseCard from '@/components/CourseCard';
 export default function CourseTable({ data }) {
   const [showDates, toggleDates] = useState(false);
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-fit">
       <div className="flex justify-center">
         <label className="cursor-pointer label">
           <span className="label-text font-medium mr-1">

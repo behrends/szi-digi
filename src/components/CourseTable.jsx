@@ -13,7 +13,7 @@ export default function CourseTable({ data }) {
           </span>
           <input
             type="checkbox"
-            className="toggle toggle-success"
+            className="toggle toggle-primary"
             checked={showDates}
             onChange={() => toggleDates(!showDates)}
           />

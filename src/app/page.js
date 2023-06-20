@@ -17,7 +17,10 @@ export default async function Home() {
           <label htmlFor="semester" className="font-medium mr-2">
             Zeige Kurse mit ihren Phasen in diesem Quartal:
           </label>
-          <select id="semester" className="select select-bordered">
+          <select
+            id="semester"
+            className="select select-bordered select-primary select-sm"
+          >
             <option selected>
               Q223・April-Juni 2023・Sommersemester (aktuelles
               Quartal)

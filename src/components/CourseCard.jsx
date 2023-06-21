@@ -10,16 +10,16 @@ export default function CourseCard({ course, color, showDates }) {
       >
         <div className="card-title">{course.name}</div>
         {showDates && (
-          <>
-            <div className="text-sm mb-1">
+          <div className="text-dhbwGrey">
+            <div className="text-sm font-medium mb-1">
               {course.data?.start.toLocaleDateString('de')}-
               {course.data?.end.toLocaleDateString('de')}
             </div>
-            <div className="text-sm">
+            <div className="text-xs">
               {course.data?.dates ? 'Termine:' : 'Keine Termine'}
             </div>
             {course.data?.dates?.map((d) => (
-              <div key={d.date} className="pl-4 text-sm">
+              <div key={d.date} className="pl-4 text-xs">
                 {`${
                   typeof d.date === 'string'
                     ? d.date
@@ -27,7 +27,7 @@ export default function CourseCard({ course, color, showDates }) {
                 } ${d.description}`}
               </div>
             ))}
-          </>
+          </div>
         )}
       </div>
     </Link>

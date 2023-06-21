@@ -9,7 +9,7 @@ export default function CourseTable({ data }) {
       <div className="flex justify-center">
         <label className="cursor-pointer label">
           <span className="label-text font-medium mr-1">
-            Termine anzeigen
+            Zeitspannen der Phasen und Termine anzeigen
           </span>
           <input
             type="checkbox"

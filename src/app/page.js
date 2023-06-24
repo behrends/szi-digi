@@ -10,12 +10,12 @@ export default async function Home() {
   console.log(rows);
 
   const timelineRows = rows.map((row) => {
-    const { name, theory, start_date, end_date } = row;
+    const { name, theory, semester, start_date, end_date } = row;
     const start = new Date(start_date);
     const end = new Date(end_date);
     const tooltip = `${start.toLocaleDateString(
       'de'
-    )}-${end.toLocaleDateString('de')}`;
+    )}-${end.toLocaleDateString('de')} <br/> ${semester}. Semester`;
     return [
       name,
       '',

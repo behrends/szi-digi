@@ -7,7 +7,6 @@ export default async function Home() {
   // fetch data from Postgres (using Vercel's storage)
   const { rows } =
     await sql`SELECT * FROM courses c, periods p WHERE c.id=p.course_id;`;
-  console.log(rows);
 
   const timelineRows = rows.map((row) => {
     const { name, theory, semester, start_date, end_date } = row;
@@ -47,10 +46,10 @@ export default async function Home() {
             </option>
             <option>Q323・Juli-September 2023・Sommersemester</option>
             <option>
-              Q423・Oktober-Dezember 2023・Sommersemester
+              Q423・Oktober-Dezember 2023・Wintersemester
             </option>
             <option>Q124・Januar-März 2024・Wintersemester</option>
-            <option>Q224・April-Juni 2024・Wintersemester</option>
+            <option>Q224・April-Juni 2024・Sommersemester</option>
             <option>Q324・Juli-September 2024・Sommersemester</option>
           </select>
         </div>

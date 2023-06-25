@@ -33,7 +33,7 @@ export default async function Home() {
         </h1>
         <div className="flex flex-col w-full items-center">
           <Timeline rows={timelineRows} />
-          <label htmlFor="semester" className="font-medium mr-2">
+          {/* <label htmlFor="semester" className="font-medium mr-2">
             Zeige Kurse mit ihren Phasen in diesem Quartal:
           </label>
           <select
@@ -51,10 +51,10 @@ export default async function Home() {
             <option>Q124・Januar-März 2024・Wintersemester</option>
             <option>Q224・April-Juni 2024・Sommersemester</option>
             <option>Q324・Juli-September 2024・Sommersemester</option>
-          </select>
+          </select> */}
         </div>
 
-        <CourseTable data={coursesBySemester} />
+        {/* <CourseTable data={coursesBySemester} /> */}
       </main>
     </div>
   );

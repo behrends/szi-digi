@@ -34,6 +34,7 @@ INSERT INTO periods VALUES (1,12,6,false,'2023-04-03','2023-09-30');
 
 -- TIF23A: id=5
 -- 1. Semester
+INSERT INTO periods VALUES (2,5,1,true,'2023-10-01','2023-12-24');
 INSERT INTO periods VALUES (3,5,1,false,'2023-12-25','2024-04-14');
 -- 2. Semester
 INSERT INTO periods VALUES (4,5,2,true,'2024-04-15','2024-07-07');

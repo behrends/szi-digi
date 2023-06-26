@@ -6,7 +6,7 @@ import { coursesBySemester } from '@/lib/data';
 export default async function Home() {
   // fetch data from Postgres (using Vercel's storage)
   const { rows } =
-    await sql`SELECT * FROM courses c, periods p WHERE c.id=p.course_id ORDER BY c.name ASC;`;
+    await sql`SELECT * FROM courses c, periods WHERE c.id=course_id ORDER BY c.name ASC;`;
 
   const timelineRows = rows.map((row) => {
     const { name, theory, semester, start_date, end_date } = row;

@@ -40,7 +40,7 @@ INSERT INTO periods VALUES (3,5,1,false,'2023-12-25','2024-04-14');
 INSERT INTO periods VALUES (4,5,2,true,'2024-04-15','2024-07-07');
 INSERT INTO periods VALUES (5,5,2,false,'2024-07-08','2024-09-29');
 -- 3. Semester
-INSERT INTO periods VALUES (6,5,4,true,'2024-09-30','2024-12-22');
+INSERT INTO periods VALUES (6,5,3,true,'2024-09-30','2024-12-22');
 INSERT INTO periods VALUES (7,5,3,false,'2024-12-23','2025-03-30');
 -- 4. Semester
 INSERT INTO periods VALUES (8,5,4,true,'2025-03-31','2025-06-22');
@@ -72,6 +72,40 @@ INSERT INTO periods VALUES (24,6,5,false,'2025-12-22','2026-01-11');
 -- 6. Semester
 INSERT INTO periods VALUES (25,6,6,true,'2026-01-12','2026-04-05');
 INSERT INTO periods VALUES (26,6,6,false,'2026-04-06','2026-09-30');
+
+-- TIF22A: id=3
+-- 2. Semester
+INSERT INTO periods VALUES (27,3,2,true,'2023-04-03','2023-06-25');
+INSERT INTO periods VALUES (28,3,2,false,'2023-06-26','2023-10-01');
+-- 3. Semester
+INSERT INTO periods VALUES (29,3,3,true,'2023-10-02','2023-12-24');
+INSERT INTO periods VALUES (30,3,3,false,'2023-12-25','2024-03-31');
+-- 4. Semester
+INSERT INTO periods VALUES (31,3,4,true,'2024-04-01','2024-06-23');
+INSERT INTO periods VALUES (32,3,4,false,'2024-06-24','2024-09-29');
+-- 5. Semester
+INSERT INTO periods VALUES (33,3,5,true,'2024-09-30','2024-12-22');
+INSERT INTO periods VALUES (34,3,5,false,'2024-12-23','2025-01-05');
+-- 6. Semester
+INSERT INTO periods VALUES (35,3,6,true,'2025-01-06','2025-03-30');
+INSERT INTO periods VALUES (36,3,6,false,'2025-03-31','2025-09-30');
+
+-- TIF22B: id=4
+-- 2. Semester
+INSERT INTO periods VALUES (37,4,2,true,'2023-04-17','2023-07-09');
+INSERT INTO periods VALUES (38,4,2,false,'2023-07-10','2023-10-01');
+-- 3. Semester
+INSERT INTO periods VALUES (39,4,3,true,'2023-10-02','2023-12-24');
+INSERT INTO periods VALUES (40,4,3,false,'2023-12-25','2024-03-31');
+-- 4. Semester
+INSERT INTO periods VALUES (41,4,4,true,'2024-04-01','2024-06-23');
+INSERT INTO periods VALUES (42,4,4,false,'2024-06-24','2024-09-29');
+-- 5. Semester
+INSERT INTO periods VALUES (43,4,5,true,'2024-09-30','2024-12-22');
+INSERT INTO periods VALUES (44,4,5,false,'2024-12-23','2025-01-05');
+-- 6. Semester
+INSERT INTO periods VALUES (45,4,6,true,'2025-01-06','2025-03-30');
+INSERT INTO periods VALUES (46,4,6,false,'2025-03-31','2025-09-30');
 
 -- TEST
 SELECT * FROM courses c, periods p WHERE c.id=p.course_id;

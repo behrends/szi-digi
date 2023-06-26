@@ -1,9 +1,40 @@
+CREATE TABLE courses (
+    id bigint PRIMARY KEY,
+    name character varying UNIQUE NOT NULL,
+    exchange_name character varying
+);
+
+CREATE TABLE periods (
+    id bigint PRIMARY KEY,
+    course_id bigint NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
+    semester smallint NOT NULL,
+    theory boolean NOT NULL,
+    start_date date NOT NULL,
+    end_date date NOT NULL,
+    CONSTRAINT periods_semester_check CHECK (((semester >= 1) AND (semester <= 6))),
+    CONSTRAINT start_end CHECK ((start_date < end_date))
+);
+
+INSERT INTO courses VALUES (1,'TIF21A',null);
+INSERT INTO courses VALUES (2,'TIF21B',null);
+INSERT INTO courses VALUES (3,'TIF22A',null);
+INSERT INTO courses VALUES (4,'TIF22B',null);
+INSERT INTO courses VALUES (5,'TIF23A',null);
+INSERT INTO courses VALUES (6,'TIF23B',null);
+INSERT INTO courses VALUES (7,'WWI21A',null);
+INSERT INTO courses VALUES (8,'WWI22A','WWI22A-AM');
+INSERT INTO courses VALUES (9,'WWI22B',null);
+INSERT INTO courses VALUES (10,'WWI23A',null);
+INSERT INTO courses VALUES (11,'WWI23B',null);
+INSERT INTO courses VALUES (12,'TIF20A',null);
+INSERT INTO courses VALUES (13,'WWI20A',null);
+
 -- TIF20: id=12
 INSERT INTO periods VALUES (1,12,6,false,'2023-04-03','2023-09-30');
 
 -- TIF23A: id=5
 -- 1. Semester
-qINSERT INTO periods VALUES (3,5,1,false,'2023-12-25','2024-04-14');
+INSERT INTO periods VALUES (3,5,1,false,'2023-12-25','2024-04-14');
 -- 2. Semester
 INSERT INTO periods VALUES (4,5,2,true,'2024-04-15','2024-07-07');
 INSERT INTO periods VALUES (5,5,2,false,'2024-07-08','2024-09-29');

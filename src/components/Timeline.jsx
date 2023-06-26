@@ -14,6 +14,7 @@ const columns = [
 export default function Timeline({ rows }) {
   const [completeData] = useState(rows);
   const [currentData, setCurrentData] = useState(rows);
+  const [dateFormat, setDateFormat] = useState(null);
   const data = [columns, ...currentData];
   return (
     <>
@@ -24,7 +25,6 @@ export default function Timeline({ rows }) {
         id="quarter"
         className="select select-bordered select-primary select-sm mb-4"
         onChange={(e) => {
-          // TODO: filter rows by quarter
           let start, end;
           switch (e.target.value) {
             case 'Q223':
@@ -53,6 +53,7 @@ export default function Timeline({ rows }) {
               break;
             default:
               setCurrentData(completeData);
+              setDateFormat(null);
               return;
           }
           const newData = completeData
@@ -70,6 +71,7 @@ export default function Timeline({ rows }) {
               return newRow;
             });
           setCurrentData(newData);
+          setDateFormat('dd.MM.yyyy');
         }}
       >
         <option value="all">Ganzer Zeitraum (alle Quartale)</option>
@@ -97,9 +99,14 @@ export default function Timeline({ rows }) {
         data={data}
         width="100%"
         height="600px"
+        chartLanguage="de"
         options={{
           hAxis: {
-            format: 'dd.MM.yyyy',
+            format: dateFormat,
+          },
+          avoidOverlappingGridLines: false,
+          timeline: {
+            rowLabelStyle: { fontSize: 18 },
           },
         }}
       />

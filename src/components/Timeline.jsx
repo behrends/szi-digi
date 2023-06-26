@@ -105,6 +105,7 @@ export default function Timeline({ rows }) {
             format: dateFormat,
           },
           avoidOverlappingGridLines: false,
+          alternatingRowStyle: false,
           timeline: {
             rowLabelStyle: { fontSize: 18 },
           },

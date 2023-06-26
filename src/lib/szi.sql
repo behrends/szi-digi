@@ -56,7 +56,7 @@ INSERT INTO periods VALUES (13,5,6,false,'2026-04-06','2026-09-30');
 -- 1. Semester
 INSERT INTO periods VALUES (14,6,1,false,'2023-10-01','2024-01-07');
 INSERT INTO periods VALUES (15,6,1,true,'2024-01-08','2024-03-31');
-INSERT INTO periods VALUES (16,6,1,true,'2024-04-01','2024-04-14');
+INSERT INTO periods VALUES (16,6,1,false,'2024-04-01','2024-04-14');
 -- 2. Semester
 INSERT INTO periods VALUES (17,6,2,true,'2024-04-15','2024-07-07');
 INSERT INTO periods VALUES (18,6,2,false,'2024-07-08','2024-09-29');
@@ -188,7 +188,7 @@ INSERT INTO periods VALUES (89,10,6,false,'2026-04-06','2026-09-30');
 -- WWI23B: id=11
 INSERT INTO periods VALUES (90,11,1,false,'2023-10-01','2024-01-07');
 INSERT INTO periods VALUES (91,11,1,true,'2024-01-08','2024-03-31');
-INSERT INTO periods VALUES (92,11,1,true,'2024-04-01','2024-04-14');
+INSERT INTO periods VALUES (92,11,1,false,'2024-04-01','2024-04-14');
 -- 2. Semester
 INSERT INTO periods VALUES (93,11,2,true,'2024-04-15','2024-07-07');
 INSERT INTO periods VALUES (94,11,2,false,'2024-07-08','2024-09-29');

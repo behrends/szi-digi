@@ -194,7 +194,7 @@ INSERT INTO periods VALUES (92,11,1,false,'2024-04-01','2024-04-14', null);
 INSERT INTO periods VALUES (93,11,2,true,'2024-04-15','2024-07-07', null);
 INSERT INTO periods VALUES (94,11,2,false,'2024-07-08','2024-09-29', '{"1. Projektarbeit"}');
 -- 3. Semester
-INSERT INTO periods VALUES (95,11,4,true,'2024-09-30','2024-12-22', null);
+INSERT INTO periods VALUES (95,11,3,true,'2024-09-30','2024-12-22', null);
 INSERT INTO periods VALUES (96,11,3,false,'2024-12-23','2025-03-30', null);
 -- 4. Semester
 INSERT INTO periods VALUES (97,11,4,true,'2025-03-31','2025-06-22', null);

@@ -7,15 +7,23 @@ import { coursesBySemester } from '@/lib/data';
 export default async function Home() {
   // fetch data from Postgres (using Vercel's storage)
   const { rows } =
-    await sql`SELECT * FROM courses c, periods WHERE c.id=course_id ORDER BY c.name ASC;`;
+    await sql`SELECT * FROM courses, periods WHERE courses.id=course_id ORDER BY name ASC;`;
 
   const timelineRows = rows.map((row) => {
-    const { name, theory, semester, start_date, end_date } = row;
+    const { name, theory, semester, start_date, end_date, remarks } =
+      row;
     const start = new Date(start_date);
     const end = new Date(end_date);
-    const tooltip = `${start.toLocaleDateString(
-      'de'
-    )}-${end.toLocaleDateString('de')} <br/> ${semester}. Semester`;
+    const tooltip = `<div class='p-1 min-w-full text-base' style='width: 180px'><p class='text-lg font-bold'>${start.toLocaleDateString(
+      'de',
+      { dateStyle: 'short' }
+    )}-${end.toLocaleDateString('de', {
+      dateStyle: 'short',
+    })}</p> <p class="text-lg">${semester}. Semester</p><p>${
+      theory ? 'Theoriephase' : 'Praxisphase'
+    }</p><p class="text-sm">${
+      remarks ? remarks.join('<br />') : ''
+    }</p></div`;
     return [
       name,
       '',

@@ -14,7 +14,7 @@ export default async function Home() {
       row;
     const start = new Date(start_date);
     const end = new Date(end_date);
-    const tooltip = `<div class='p-1 min-w-full text-base' style='width: 180px'><p class='text-lg font-bold'>${start.toLocaleDateString(
+    const tooltip = `<div class='p-1 text-base text-center' style='width: 220px;'><p class='text-lg font-bold'>${start.toLocaleDateString(
       'de',
       { dateStyle: 'short' }
     )}-${end.toLocaleDateString('de', {

@@ -14,8 +14,11 @@ const columns = [
 export default function Timeline({ rows }) {
   const [completeData] = useState(rows);
   const [currentData, setCurrentData] = useState(rows);
-  const [dateFormat, setDateFormat] = useState(null);
   const data = [columns, ...currentData];
+
+  const dateFormat =
+    currentData === completeData ? null : 'dd.MM.yyyy';
+
   return (
     <>
       <label htmlFor="quarter" className="font-medium mr-2">
@@ -53,7 +56,6 @@ export default function Timeline({ rows }) {
               break;
             default:
               setCurrentData(completeData);
-              setDateFormat(null);
               return;
           }
           const newData = completeData
@@ -71,7 +73,6 @@ export default function Timeline({ rows }) {
               return newRow;
             });
           setCurrentData(newData);
-          setDateFormat('dd.MM.yyyy');
         }}
       >
         <option value="all">Ganzer Zeitraum (alle Quartale)</option>

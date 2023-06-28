@@ -1,5 +1,6 @@
 import { sql } from '@vercel/postgres';
 import { notFound } from 'next/navigation';
+import { calcDiffInWeeks } from '@/lib/utils';
 
 async function fetchCourse(name) {
   // TODO: cache locally?
@@ -34,11 +35,7 @@ export default async function Course({ params }) {
       periods.map((period, rowNum) => {
         const { start_date, end_date } = period;
 
-        const diffInMs = Math.abs(
-          end_date.getTime() - start_date.getTime()
-        );
-        const weeks = Math.floor(diffInMs / 604800000);
-
+        const weeks = calcDiffInWeeks(start_date, end_date);
         const timespan = `${start_date.toLocaleDateString('de', {
           dateStyle: 'short',
         })}-${end_date.toLocaleDateString('de', {

@@ -3,6 +3,7 @@ import CourseTable from '@/components/CourseTable';
 import Timeline from '@/components/Timeline';
 import CourseLinks from '@/components/CourseLinks';
 import { coursesBySemester } from '@/lib/data';
+import { calcDiffInWeeks } from '@/lib/utils';
 
 export default async function Home() {
   // fetch data from Postgres (using Vercel's storage)
@@ -14,6 +15,7 @@ export default async function Home() {
       row;
     const start = new Date(start_date);
     const end = new Date(end_date);
+    const weeks = calcDiffInWeeks(start, end);
     const tooltip = `<div class='p-1 text-base text-center' style='width: 220px;'><p class='text-lg font-bold'>${start.toLocaleDateString(
       'de',
       { dateStyle: 'short' }
@@ -21,7 +23,7 @@ export default async function Home() {
       dateStyle: 'short',
     })}</p> <p class="text-lg">${semester}. Semester</p><p>${
       theory ? 'Theoriephase' : 'Praxisphase'
-    }</p><p class="text-sm">${
+    }</p><p class="text-sm">${weeks} Wochen</p><p class="text-sm">${
       remarks ? remarks.join('<br />') : ''
     }</p></div`;
     return [

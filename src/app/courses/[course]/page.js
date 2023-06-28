@@ -32,14 +32,18 @@ export default async function Course({ params }) {
   const rows = Object.entries(periodsBySemester).flatMap(
     ([semester, periods]) =>
       periods.map((period, rowNum) => {
-        const timespan = `${period.start_date.toLocaleDateString(
-          'de',
-          {
-            dateStyle: 'short',
-          }
-        )}-${period.end_date.toLocaleDateString('de', {
+        const { start_date, end_date } = period;
+
+        const diffInMs = Math.abs(
+          end_date.getTime() - start_date.getTime()
+        );
+        const weeks = Math.floor(diffInMs / 604800000);
+
+        const timespan = `${start_date.toLocaleDateString('de', {
           dateStyle: 'short',
-        })} (?? Wochen)`;
+        })}-${end_date.toLocaleDateString('de', {
+          dateStyle: 'short',
+        })} (${weeks} Wochen)`;
         let theoryDates, practiceDates;
         if (period.theory) theoryDates = timespan;
         else practiceDates = timespan;

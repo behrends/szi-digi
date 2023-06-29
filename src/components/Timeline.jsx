@@ -59,7 +59,7 @@ export default function Timeline({ rows }) {
       </label>
       <select
         id="quarter"
-        className="select select-bordered select-primary select-sm mb-4"
+        className="select select-bordered border-dhbwRed select-sm mb-4"
         onChange={(e) => {
           let dates = getQuarterDates(e.target.value);
           if (dates === null) {
@@ -104,23 +104,25 @@ export default function Timeline({ rows }) {
           Q324・Juli-September 2024・Sommersemester
         </option>
       </select>
-      <Chart
-        chartType="Timeline"
-        data={data}
-        width="100%"
-        height="600px"
-        chartLanguage="de"
-        options={{
-          hAxis: {
-            format: dateFormat,
-          },
-          avoidOverlappingGridLines: false,
-          alternatingRowStyle: false,
-          timeline: {
-            rowLabelStyle: { fontSize: 18 },
-          },
-        }}
-      />
+      <div className="w-full px-6">
+        <Chart
+          chartType="Timeline"
+          data={data}
+          width="100%"
+          height="600px"
+          chartLanguage="de"
+          options={{
+            hAxis: {
+              format: dateFormat,
+            },
+            avoidOverlappingGridLines: false,
+            alternatingRowStyle: false,
+            timeline: {
+              rowLabelStyle: { fontSize: 18 },
+            },
+          }}
+        />
+      </div>
     </>
   );
 }

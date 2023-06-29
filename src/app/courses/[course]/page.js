@@ -48,7 +48,7 @@ export default async function Course({ params }) {
           <tr
             className={
               periods.length === rowNum + 1
-                ? 'border-dhbwRed'
+                ? 'border-slate-300'
                 : 'border-none'
             }
           >
@@ -74,7 +74,7 @@ export default async function Course({ params }) {
   return (
     <>
       <h1 className="text-4xl">{periods[0].name}</h1>
-      <p>
+      <p className="mb-4">
         <a
           className="text-dhbwRed"
           href={`https://webmail.dhbw-loerrach.de/owa/calendar/kal-${courseCalName.toLowerCase()}@dhbw-loerrach.de/Kalender/calendar.html`}
@@ -86,7 +86,7 @@ export default async function Course({ params }) {
       <h2 className="text-3xl">Blockplan</h2>
       <table className="table table-xs text-lg w-3/4">
         <thead className="text-lg">
-          <tr className="border-dhbwRed">
+          <tr className="border-0">
             <th>Semester</th>
             <th>Studium an der Dualen Hochschule</th>
             <th>Ausbildung im Unternehmen / Urlaub</th>

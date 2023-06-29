@@ -26,6 +26,8 @@ export default async function Course({ params }) {
 
   const courseCalName = periods[0].exchange_name ?? periods[0].name;
   const today = new Date();
+  let sumTheoryWeeks = 0,
+    sumPracticeWeeks = 0;
 
   // group periods by semester
   let periodsBySemester = periods.reduce(function (groups, current) {
@@ -39,16 +41,18 @@ export default async function Course({ params }) {
   const rows = Object.entries(periodsBySemester).flatMap(
     ([semester, periods]) =>
       periods.map((period, rowNum) => {
-        const { start_date, end_date } = period;
+        const { theory, start_date, end_date } = period;
 
         const weeks = calcDiffInWeeks(start_date, end_date);
+        if (theory) sumTheoryWeeks += weeks;
+        else sumPracticeWeeks += weeks;
         const timespan = `${start_date.toLocaleDateString('de', {
           dateStyle: 'short',
         })}-${end_date.toLocaleDateString('de', {
           dateStyle: 'short',
         })} (${weeks} Wochen)`;
         let theoryDates, practiceDates;
-        if (period.theory) theoryDates = timespan;
+        if (theory) theoryDates = timespan;
         else practiceDates = timespan;
         // current period is highlighted
         const highlighted =
@@ -112,7 +116,46 @@ export default async function Course({ params }) {
           </tr>
         </thead>
         <tbody>{rows}</tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td>{`Summe: ${sumTheoryWeeks} Wochen`}</td>
+            <td>{`Summe: ${sumPracticeWeeks} Wochen`}</td>
+            <td></td>
+          </tr>
+        </tfoot>
       </table>
+      <h3 className="text-2xl">Prüfungsrelevante Termine</h3>
+      <p>
+        Klausurwoche: jeweils circa die letzte Woche der Theoriephase
+      </p>
+      <p>
+        Die folgenden Termine sind jeweils die späteste Möglichkeit
+        zur Anmeldung und zur Abgabe (jeweils bis spätestens 12:00
+        Uhr).
+      </p>
     </>
   );
 }
+
+/*
+Anmeldung 1. Projektarbeit
+Mitteilung des gewünschten Schwerpunktes
+Abgabe 1. Projektarbeit
+Abgabe Reflexionsbericht, Ablaufplan
+Vorbereitung/Briefing 2. Projektarbeit Anmeldung 2. Projektarbeit
+Abgabe 2. Projektarbeit
+Abgabe Reflexionsbericht, Ablaufplan
+Präsentation 2. Projektarbeit
+Abgabe der Studienarbeit/Projekt
+Anmeldung 3. Projektarbeit
+Abgabe 3. Projektarbeit
+Vorbereitung/Briefing Bachelorarbeit
+Anmeldung Bachelorarbeit
+Abgabe Bachelorarbeit
+Abgabe Reflexionsbericht, Ablaufplan
+17.07.23 02.10.23
+Juni 2024 08.07.24 30.09.24
+November 2024 30.03.25 28.04.25 23.06.25
+März 2025 09.06.25 01.09.25
+*/

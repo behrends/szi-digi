@@ -90,7 +90,7 @@ export default async function Course({ params }) {
       text-dhbwRed"
         />
       </Link>
-      <h1 className="text-4xl">{periods[0].name}</h1>
+      <h1 className="text-4xl text-dhbwRed">{periods[0].name}</h1>
       <p className="mb-4">
         <a
           className="text-dhbwRed flex"

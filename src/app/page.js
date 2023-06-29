@@ -38,9 +38,12 @@ export default async function Home() {
 
   return (
     <>
-      <h1 className="text-4xl mb-10">
-        Infos zu den Kursen am SZI der DHBW Lörrach
+      <h1 className="text-4xl mb-3 text-dhbwRed">
+        SZI — DHBW Lörrach
       </h1>
+      <h2 className="text-3xl mb-1">
+        Übersicht der Phasen aller Kurse
+      </h2>
       <div className="flex flex-col w-full items-center">
         <Timeline rows={timelineRows} />
         <CourseLinks />

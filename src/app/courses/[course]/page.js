@@ -1,6 +1,10 @@
 import { sql } from '@vercel/postgres';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowTopRightOnSquareIcon,
+  HomeModernIcon,
+} from '@heroicons/react/24/outline';
 import { calcDiffInWeeks } from '@/lib/utils';
 
 async function fetchCourse(name) {
@@ -80,6 +84,12 @@ export default async function Course({ params }) {
 
   return (
     <>
+      <Link href="/">
+        <HomeModernIcon
+          className="absolute top-4 left-4 h-6 w-6 
+      text-dhbwRed"
+        />
+      </Link>
       <h1 className="text-4xl">{periods[0].name}</h1>
       <p className="mb-4">
         <a

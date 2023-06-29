@@ -1,5 +1,6 @@
 import { sql } from '@vercel/postgres';
 import { notFound } from 'next/navigation';
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import { calcDiffInWeeks } from '@/lib/utils';
 
 async function fetchCourse(name) {
@@ -82,11 +83,12 @@ export default async function Course({ params }) {
       <h1 className="text-4xl">{periods[0].name}</h1>
       <p className="mb-4">
         <a
-          className="text-dhbwRed"
+          className="text-dhbwRed flex"
           href={`https://webmail.dhbw-loerrach.de/owa/calendar/kal-${courseCalName.toLowerCase()}@dhbw-loerrach.de/Kalender/calendar.html`}
           target="_blank"
         >
-          Vorlesungskalender öffnen (externer Link)
+          Vorlesungskalender öffnen
+          <ArrowTopRightOnSquareIcon className="w-4 ml-1" />
         </a>
       </p>
       <h2 className="text-3xl">Blockplan</h2>

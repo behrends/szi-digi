@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="de">
       <body>
-        <main className="flex flex-col justify-start items-center min-h-screen py-6">
+        <main className="flex flex-col justify-start items-center min-h-screen px-3 py-6">
           {children}
         </main>
       </body>

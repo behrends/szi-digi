@@ -104,7 +104,7 @@ export default function Timeline({ rows }) {
           Q324・Juli-September 2024・Sommersemester
         </option>
       </select>
-      <div className="w-full px-6">
+      <div className="w-full">
         <Chart
           chartType="Timeline"
           data={data}

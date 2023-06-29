@@ -83,6 +83,7 @@ export default async function Course({ params }) {
           Vorlesungskalender öffnen (externer Link)
         </a>
       </p>
+      <h2 className="text-3xl">Blockplan</h2>
       <table className="table table-xs text-lg w-3/4">
         <thead className="text-lg">
           <tr className="border-dhbwRed">

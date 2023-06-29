@@ -30,7 +30,7 @@ export default async function Home() {
       name,
       '',
       tooltip,
-      theory ? '#E2001A' : '#5C6971',
+      theory ? '#E2001A' : '#5C6971', // TODO: use tailwind config or css var
       start,
       end,
     ];
@@ -38,7 +38,7 @@ export default async function Home() {
 
   return (
     <>
-      <h1 className="text-dhbwGrey text-4xl mb-10">
+      <h1 className="text-4xl mb-10">
         Infos zu den Kursen am SZI der DHBW Lörrach
       </h1>
       <div className="flex flex-col w-full items-center">

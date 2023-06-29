@@ -59,7 +59,7 @@ export default function Timeline({ rows }) {
       </label>
       <select
         id="quarter"
-        className="select select-bordered border-dhbwRed select-sm mb-4"
+        className="select border-dhbwRed select-sm mb-4"
         onChange={(e) => {
           let dates = getQuarterDates(e.target.value);
           if (dates === null) {

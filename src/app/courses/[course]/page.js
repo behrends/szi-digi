@@ -17,6 +17,78 @@ async function fetchCourse(name) {
   return rows;
 }
 
+function ExamDates({ course }) {
+  if (course !== 'TIF22A' && course !== 'TIF22B') return null;
+  return (
+    <table>
+      <tr>
+        <td>
+          Anmeldung 1. Projektarbeit
+          <br />
+          Mitteilung des gewünschten Schwerpunktes
+        </td>
+        <td>17.07.23</td>
+      </tr>
+      <tr>
+        <td>
+          Abgabe 1. Projektarbeit
+          <br />
+          Abgabe Reflexionsbericht, Ablaufplan
+        </td>
+        <td>02.10.23</td>
+      </tr>
+      <tr>
+        <td>Vorbereitung/Briefing 2. Projektarbeit</td>
+        <td>Juni 2024</td>
+      </tr>
+      <tr>
+        <td>Anmeldung 2. Projektarbeit</td>
+        <td>08.07.24</td>
+      </tr>
+      <tr>
+        <td>
+          Abgabe 2. Projektarbeit
+          <br />
+          Abgabe Reflexionsbericht, Ablaufplan
+        </td>
+        <td>30.09.24</td>
+      </tr>
+      <tr>
+        <td>Präsentation 2. Projektarbeit</td>
+        <td>November 2024</td>
+      </tr>
+      <tr>
+        <td>Abgabe der Studienarbeit/Projekt</td>
+        <td>30.03.25</td>
+      </tr>
+      <tr>
+        <td>Anmeldung 3. Projektarbeit</td>
+        <td>28.04.25</td>
+      </tr>
+      <tr>
+        <td>Abgabe 3. Projektarbeit</td>
+        <td>23.06.25</td>
+      </tr>
+      <tr>
+        <td>Vorbereitung/Briefing Bachelorarbeit</td>
+        <td>März 2025</td>
+      </tr>
+      <tr>
+        <td>Anmeldung Bachelorarbeit</td>
+        <td>09.06.25</td>
+      </tr>
+      <tr>
+        <td>
+          Abgabe Bachelorarbeit
+          <br />
+          Abgabe Reflexionsbericht, Ablaufplan
+        </td>
+        <td>01.09.25</td>
+      </tr>
+    </table>
+  );
+}
+
 export default async function Course({ params }) {
   const courseName = params.course;
   const periods = await fetchCourse(courseName);
@@ -134,28 +206,7 @@ export default async function Course({ params }) {
         zur Anmeldung und zur Abgabe (jeweils bis spätestens 12:00
         Uhr).
       </p>
+      <ExamDates course={courseName} />
     </>
   );
 }
-
-/*
-Anmeldung 1. Projektarbeit
-Mitteilung des gewünschten Schwerpunktes
-Abgabe 1. Projektarbeit
-Abgabe Reflexionsbericht, Ablaufplan
-Vorbereitung/Briefing 2. Projektarbeit Anmeldung 2. Projektarbeit
-Abgabe 2. Projektarbeit
-Abgabe Reflexionsbericht, Ablaufplan
-Präsentation 2. Projektarbeit
-Abgabe der Studienarbeit/Projekt
-Anmeldung 3. Projektarbeit
-Abgabe 3. Projektarbeit
-Vorbereitung/Briefing Bachelorarbeit
-Anmeldung Bachelorarbeit
-Abgabe Bachelorarbeit
-Abgabe Reflexionsbericht, Ablaufplan
-17.07.23 02.10.23
-Juni 2024 08.07.24 30.09.24
-November 2024 30.03.25 28.04.25 23.06.25
-März 2025 09.06.25 01.09.25
-*/

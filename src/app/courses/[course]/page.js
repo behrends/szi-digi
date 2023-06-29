@@ -20,6 +20,7 @@ export default async function Course({ params }) {
   if (!periods) notFound(); // implicit return
 
   const courseCalName = periods[0].exchange_name ?? periods[0].name;
+  const today = new Date();
 
   // group periods by semester
   let periodsBySemester = periods.reduce(function (groups, current) {
@@ -44,17 +45,22 @@ export default async function Course({ params }) {
         let theoryDates, practiceDates;
         if (period.theory) theoryDates = timespan;
         else practiceDates = timespan;
+        // current period is highlighted
+        const highlighted =
+          start_date <= today && today <= end_date
+            ? 'bg-yellow-100'
+            : null;
         return (
           <tr
-            className={
+            className={`${
               periods.length === rowNum + 1
                 ? 'border-slate-300'
                 : 'border-none'
-            }
+            } ${highlighted}`}
           >
             {rowNum === 0 && (
               <td
-                className="text-lg font-bold text-center"
+                className="text-lg font-bold text-center bg-white"
                 rowSpan={periods.length}
               >
                 {semester}

@@ -1,8 +1,6 @@
 import { sql } from '@vercel/postgres';
-import CourseTable from '@/components/CourseTable';
 import Timeline from '@/components/Timeline';
 import CourseLinks from '@/components/CourseLinks';
-import { coursesBySemester } from '@/lib/data';
 import { calcDiffInWeeks } from '@/lib/utils';
 
 export default async function Home() {
@@ -47,27 +45,7 @@ export default async function Home() {
       <div className="flex flex-col w-full items-center">
         <Timeline rows={timelineRows} />
         <CourseLinks />
-        {/* <label htmlFor="semester" className="font-medium mr-2">
-            Zeige Kurse mit ihren Phasen in diesem Quartal:
-          </label>
-          <select
-            id="semester"
-            className="select select-bordered select-primary select-sm"
-          >
-            <option selected>
-              Q223・April-Juni 2023・Sommersemester (aktuelles
-              Quartal)
-            </option>
-            <option>Q323・Juli-September 2023・Sommersemester</option>
-            <option>
-              Q423・Oktober-Dezember 2023・Wintersemester
-            </option>
-            <option>Q124・Januar-März 2024・Wintersemester</option>
-            <option>Q224・April-Juni 2024・Sommersemester</option>
-            <option>Q324・Juli-September 2024・Sommersemester</option>
-          </select> */}
       </div>
-      {/* <CourseTable data={coursesBySemester} /> */}
     </>
   );
 }

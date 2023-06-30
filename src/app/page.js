@@ -1,11 +1,15 @@
 import Timeline from '@/components/Timeline';
 import CourseLinks from '@/components/CourseLinks';
 import { calcDiffInWeeks } from '@/lib/utils';
-import { getCourses, getCoursesAndPeriods } from '@/lib/queries';
+import {
+  preload,
+  getCourses,
+  getCoursesAndPeriods,
+} from '@/lib/queries';
 
 export default async function Home() {
+  preload();
   const coursesAndPeriods = await getCoursesAndPeriods();
-
   const courses = await getCourses();
 
   const timelineRows = coursesAndPeriods.map((row) => {

@@ -7,6 +7,7 @@ export default function CourseLinks({ courses }) {
       {courses.map((course) => {
         return (
           <CourseCard
+            key={course.id}
             course={{ name: course.name }}
             color="dhbwRed"
           />

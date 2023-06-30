@@ -24,7 +24,7 @@ INSERT INTO courses VALUES (5,'TIF23A',null);
 INSERT INTO courses VALUES (6,'TIF23B',null);
 INSERT INTO courses VALUES (7,'WWI21A',null);
 INSERT INTO courses VALUES (8,'WWI22A','WWI22A-AM');
-INSERT INTO courses VALUES (9,'WWI22B',null);
+-- INSERT INTO courses VALUES (9,'WWI22B',null); zusammengelegt mit WWI22A
 INSERT INTO courses VALUES (10,'WWI23A',null);
 INSERT INTO courses VALUES (11,'WWI23B',null);
 INSERT INTO courses VALUES (12,'TIF20A',null);

@@ -4,7 +4,7 @@ import CourseLinks from '@/components/CourseLinks';
 import { calcDiffInWeeks } from '@/lib/utils';
 
 async function getCourses() {
-  const { rows } = await sql`SELECT * FROM courses;`;
+  const { rows } = await sql`SELECT * FROM courses ORDER BY name;`;
   return rows;
 }
 

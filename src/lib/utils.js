@@ -1,3 +1,4 @@
+import { cache } from 'react';
 // TODOs:
 // - TypeScript
 // - generate tests with GPT

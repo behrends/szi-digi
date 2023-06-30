@@ -1,21 +1,14 @@
-import { sql } from '@vercel/postgres';
 import Timeline from '@/components/Timeline';
 import CourseLinks from '@/components/CourseLinks';
 import { calcDiffInWeeks } from '@/lib/utils';
-
-async function getCourses() {
-  const { rows } = await sql`SELECT * FROM courses ORDER BY name;`;
-  return rows;
-}
+import { getCourses, getCoursesAndPeriods } from '@/lib/queries';
 
 export default async function Home() {
-  // fetch data from Postgres (using Vercel's storage)
-  const { rows } =
-    await sql`SELECT * FROM courses, periods WHERE courses.id=course_id ORDER BY name ASC;`;
+  const coursesAndPeriods = await getCoursesAndPeriods();
 
   const courses = await getCourses();
 
-  const timelineRows = rows.map((row) => {
+  const timelineRows = coursesAndPeriods.map((row) => {
     const { name, theory, semester, start_date, end_date, remarks } =
       row;
     const start = new Date(start_date);

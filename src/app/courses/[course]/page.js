@@ -1,4 +1,3 @@
-import { sql } from '@vercel/postgres';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
@@ -6,16 +5,7 @@ import {
   HomeModernIcon,
 } from '@heroicons/react/24/outline';
 import { calcDiffInWeeks } from '@/lib/utils';
-
-async function fetchCourse(name) {
-  // TODO: cache locally?
-  // fetch data from Postgres (using Vercel's storage)
-  const { rows } =
-    await sql`SELECT * FROM courses c, periods p WHERE c.id=p.course_id AND name=${name} ORDER BY p.start_date`;
-
-  if (rows.length === 0) return undefined;
-  return rows;
-}
+import { getCoursesAndPeriodsByName } from '@/lib/queries';
 
 function ExamDates({ course }) {
   if (course !== 'TIF22A' && course !== 'TIF22B') return null;
@@ -91,7 +81,7 @@ function ExamDates({ course }) {
 
 export default async function Course({ params }) {
   const courseName = params.course;
-  const periods = await fetchCourse(courseName);
+  const periods = await getCoursesAndPeriodsByName(courseName);
 
   // this will show the 404 page
   if (!periods) notFound(); // implicit return

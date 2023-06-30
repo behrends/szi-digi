@@ -3,10 +3,17 @@ import Timeline from '@/components/Timeline';
 import CourseLinks from '@/components/CourseLinks';
 import { calcDiffInWeeks } from '@/lib/utils';
 
+async function getCourses() {
+  const { rows } = await sql`SELECT * FROM courses;`;
+  return rows;
+}
+
 export default async function Home() {
   // fetch data from Postgres (using Vercel's storage)
   const { rows } =
     await sql`SELECT * FROM courses, periods WHERE courses.id=course_id ORDER BY name ASC;`;
+
+  const courses = await getCourses();
 
   const timelineRows = rows.map((row) => {
     const { name, theory, semester, start_date, end_date, remarks } =
@@ -43,8 +50,8 @@ export default async function Home() {
         Übersicht der Phasen aller Kurse
       </h2>
       <div className="flex flex-col w-full items-center">
-        <Timeline rows={timelineRows} />
-        <CourseLinks />
+        <Timeline rows={timelineRows} courses={courses} />
+        <CourseLinks courses={courses} />
       </div>
     </>
   );

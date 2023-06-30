@@ -44,9 +44,13 @@ function getQuarterDates(quarter) {
   return { start, end };
 }
 
-export default function Timeline({ rows }) {
+export default function Timeline({ rows, courses }) {
   const [completeData] = useState(rows);
   const [currentData, setCurrentData] = useState(rows);
+  const [allCourses] = useState(new Set(courses));
+  const [currentCourseNames, setCurrentCourseNames] = useState(
+    new Set(courses)
+  );
   const data = [columns, ...currentData];
 
   const dateFormat =
@@ -64,9 +68,11 @@ export default function Timeline({ rows }) {
           let dates = getQuarterDates(e.target.value);
           if (dates === null) {
             setCurrentData(completeData);
+            setCurrentCourseNames(allCourses);
             return;
           }
           let { start, end } = dates;
+          const newCourses = new Set();
           const newData = completeData
             .filter((row) => {
               return (
@@ -76,12 +82,14 @@ export default function Timeline({ rows }) {
               );
             })
             .map((row) => {
+              newCourses.add(row[0]);
               const newRow = [...row];
               newRow[4] = newRow[4] <= start ? start : newRow[4];
               newRow[5] = newRow[5] >= end ? end : newRow[5];
               return newRow;
             });
           setCurrentData(newData);
+          setCurrentCourseNames(newCourses);
         }}
       >
         <option value="all">Ganzer Zeitraum (alle Quartale)</option>
@@ -104,12 +112,15 @@ export default function Timeline({ rows }) {
           Q324・Juli-September 2024・Sommersemester
         </option>
       </select>
-      <div className="w-full">
+      <div
+        className="w-full"
+        style={{ height: `${currentCourseNames.size * 48}px` }}
+      >
         <Chart
           chartType="Timeline"
           data={data}
           width="100%"
-          height="600px"
+          height="100%"
           chartLanguage="de"
           options={{
             hAxis: {

@@ -48,8 +48,8 @@ export default function Timeline({
       .append('title')
       .text((d) => d.course);
 
-    void d3.select(gx.current).call(d3.axisBottom(x));
-    void d3.select(gy.current).call(d3.axisLeft(y));
+    d3.select(gx.current).call(d3.axisBottom(x));
+    d3.select(gy.current).call(d3.axisLeft(y));
   }, [gx, gy, svgRef, x, y, courses]);
 
   return (

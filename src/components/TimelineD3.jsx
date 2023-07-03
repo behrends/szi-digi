@@ -13,6 +13,7 @@ export default function Timeline({
 }) {
   const gx = useRef(),
     gy = useRef(),
+    todayLine = useRef(),
     svgRef = useRef();
 
   const width = 640,
@@ -36,7 +37,8 @@ export default function Timeline({
     .padding(0.08);
 
   useEffect(() => {
-    d3.select(svgRef.current)
+    const svg = d3.select(svgRef.current);
+    svg
       .selectAll('rect')
       .data(data)
       .join('rect')
@@ -48,12 +50,23 @@ export default function Timeline({
       .append('title')
       .text((d) => d.course);
 
+    d3.select(todayLine.current).raise(); // move todayLine to front
+
     d3.select(gx.current).call(d3.axisBottom(x));
     d3.select(gy.current).call(d3.axisLeft(y));
   }, []);
 
   return (
     <svg ref={svgRef} width={width} height={height}>
+      <line
+        ref={todayLine}
+        x1="100"
+        y1={0 + marginTop}
+        x2="100"
+        y2={height - marginBottom}
+        stroke="lightgreen"
+        strokeWidth="1.25"
+      />
       <g
         ref={gx}
         transform={`translate(0,${height - marginBottom})`}

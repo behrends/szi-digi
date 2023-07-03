@@ -16,13 +16,13 @@ export default function Timeline({
     todayLine = useRef(),
     svgRef = useRef();
 
-  const width = 640,
+  const width = 960,
     marginTop = 20,
     marginRight = 20,
     marginBottom = 30,
     marginLeft = 50;
 
-  const height = courses.length * 35 + marginTop + marginBottom;
+  const height = courses.length * 30 + marginTop + marginBottom;
   const courseNames = courses.map((course) => course.name);
 
   const x = d3
@@ -57,7 +57,11 @@ export default function Timeline({
   }, []);
 
   return (
-    <svg ref={svgRef} width={width} height={height}>
+    <svg
+      ref={svgRef}
+      viewBox={`0 0 ${width} ${height}`}
+      style={{ maxHeight: '600px' }}
+    >
       <line
         ref={todayLine}
         x1="100"

@@ -50,7 +50,7 @@ export default function Timeline({
 
     d3.select(gx.current).call(d3.axisBottom(x));
     d3.select(gy.current).call(d3.axisLeft(y));
-  }, [gx, gy, svgRef, x, y, courses]);
+  }, []);
 
   return (
     <svg ref={svgRef} width={width} height={height}>

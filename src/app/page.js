@@ -27,7 +27,7 @@ export default async function Home() {
       theory ? 'Theoriephase' : 'Praxisphase'
     }</p><p class="text-sm">${weeks} Wochen</p><p class="text-sm">${
       remarks ? remarks.join('<br />') : ''
-    }</p></div`;
+    }</p></div>`;
     return [
       name,
       '',

@@ -8,12 +8,13 @@ export default async function Page() {
   let domainStart = new Date(),
     domainEnd = new Date();
   const data = coursesAndPeriods.map((row) => {
-    const { name, start_date, end_date, theory } = row;
+    const { name, start_date, end_date, semester, theory, remarks } =
+      row;
     const start = new Date(start_date);
     const end = new Date(end_date);
     if (start < domainStart) domainStart = start;
     if (end > domainEnd) domainEnd = end;
-    return { course: name, start, end, theory };
+    return { course: name, start, end, semester, theory, remarks };
   });
 
   return (

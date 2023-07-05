@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
-import { germanLocale } from '@/lib/utils.js';
+import { calcDiffInWeeks, germanLocale } from '@/lib/utils.js';
 
 d3.timeFormatDefaultLocale(germanLocale);
 
@@ -14,6 +14,7 @@ export default function Timeline({
   const gx = useRef(),
     gy = useRef(),
     todayLine = useRef(),
+    divRef = useRef(),
     svgRef = useRef();
 
   const width = 960,
@@ -38,6 +39,15 @@ export default function Timeline({
 
   useEffect(() => {
     const svg = d3.select(svgRef.current);
+    const div = d3.select(divRef.current);
+
+    const tooltip = div
+      .append('div')
+      .attr(
+        'class',
+        'absolute opacity-0 bg-white border border-gray-300 rounded-md shadow-md'
+      );
+
     svg
       .selectAll('rect')
       .data(data)
@@ -47,8 +57,36 @@ export default function Timeline({
       .attr('width', (d) => x(d.end) - x(d.start))
       .attr('height', y.bandwidth())
       .attr('fill', (d) => (d.theory ? '#E2001A' : '#5C6971'))
-      .append('title')
-      .text((d) => d.course);
+      .on(
+        'mouseover',
+        (_, { start, end, semester, theory, remarks }) => {
+          const weeks = calcDiffInWeeks(start, end);
+          tooltip.transition().duration(200).style('opacity', 0.9);
+          tooltip.html(
+            `<div class='p-1 text-base text-center' style='width: 220px;'>
+            <p class='text-lg font-bold'>${start.toLocaleDateString(
+              'de',
+              { dateStyle: 'short' }
+            )}-${end.toLocaleDateString('de', {
+              dateStyle: 'short',
+            })}</p> 
+            <p class="text-lg">${semester}. Semester</p>
+            <p>${theory ? 'Theoriephase' : 'Praxisphase'}</p>
+            <p class="text-sm">${weeks} Wochen</p>
+            <p class="text-sm">${
+              remarks ? remarks.join('<br/>') : ''
+            }</p></div>`
+          );
+        }
+      )
+      .on('mousemove', (event) =>
+        tooltip
+          .style('left', `${event.pageX + 10}px`)
+          .style('top', `${event.pageY - 28}px`)
+      )
+      .on('mouseleave', () =>
+        tooltip.transition().duration(500).style('opacity', 0)
+      );
 
     d3.select(todayLine.current).raise(); // move todayLine to front
 
@@ -57,25 +95,27 @@ export default function Timeline({
   }, []);
 
   return (
-    <svg
-      ref={svgRef}
-      viewBox={`0 0 ${width} ${height}`}
-      style={{ maxHeight: '600px' }}
-    >
-      <line
-        ref={todayLine}
-        x1="100"
-        y1={0 + marginTop}
-        x2="100"
-        y2={height - marginBottom}
-        stroke="lightgreen"
-        strokeWidth="1.25"
-      />
-      <g
-        ref={gx}
-        transform={`translate(0,${height - marginBottom})`}
-      />
-      <g ref={gy} transform={`translate(${marginLeft},0)`} />
-    </svg>
+    <div className="flex w-full" ref={divRef}>
+      <svg
+        ref={svgRef}
+        viewBox={`0 0 ${width} ${height}`}
+        style={{ maxHeight: '600px' }}
+      >
+        <line
+          ref={todayLine}
+          x1="100"
+          y1={0 + marginTop}
+          x2="100"
+          y2={height - marginBottom}
+          stroke="lightgreen"
+          strokeWidth="1.25"
+        />
+        <g
+          ref={gx}
+          transform={`translate(0,${height - marginBottom})`}
+        />
+        <g ref={gy} transform={`translate(${marginLeft},0)`} />
+      </svg>
+    </div>
   );
 }

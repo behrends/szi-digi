@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
+import SelectQuarters from '@/components/SelectQuarters';
 import {
   calcDiffInWeeks,
   germanLocale,
@@ -119,65 +120,41 @@ export default function Timeline({
       .call(d3.axisLeft(y));
   }, [currentData, currentCourseNames, domainRange]);
 
+  function handleQuarterChanged(quarter) {
+    // determine data for selected quarter
+    const dates = getQuarterDates(quarter);
+    if (dates === null) {
+      setCurrentData(completeData);
+      setCurrentCourseNames(allCourses);
+      setDomainRange(wholeRange);
+      return;
+    }
+    let { start, end } = dates;
+    const newCourses = new Set();
+    const newData = completeData
+      .filter((item) => {
+        return (
+          (item.start >= start && item.start <= end) ||
+          (item.end >= start && item.end <= end) ||
+          (item.start <= start && item.end >= end)
+        );
+      })
+      .map((item) => {
+        newCourses.add(item.course);
+        const newItem = { ...item };
+        newItem.start =
+          newItem.start <= start ? start : newItem.start;
+        newItem.end = newItem.end >= end ? end : newItem.end;
+        return newItem;
+      });
+    setCurrentData(newData);
+    setCurrentCourseNames(newCourses);
+    setDomainRange({ start, end });
+  }
+
   return (
     <>
-      <label htmlFor="quarter" className="font-medium mr-2">
-        Zeige Kurse mit ihren Phasen in diesem Quartal:
-      </label>
-      <select
-        id="quarter"
-        className="select border-dhbwRed select-sm"
-        onChange={(e) => {
-          let dates = getQuarterDates(e.target.value);
-          if (dates === null) {
-            setCurrentData(completeData);
-            setCurrentCourseNames(allCourses);
-            setDomainRange(wholeRange);
-            return;
-          }
-          let { start, end } = dates;
-          const newCourses = new Set();
-          const newData = completeData
-            .filter((item) => {
-              return (
-                (item.start >= start && item.start <= end) ||
-                (item.end >= start && item.end <= end) ||
-                (item.start <= start && item.end >= end)
-              );
-            })
-            .map((item) => {
-              newCourses.add(item.course);
-              const newItem = { ...item };
-              newItem.start =
-                newItem.start <= start ? start : newItem.start;
-              newItem.end = newItem.end >= end ? end : newItem.end;
-              return newItem;
-            });
-          setCurrentData(newData);
-          setCurrentCourseNames(newCourses);
-          setDomainRange({ start, end });
-        }}
-      >
-        <option value="all">Ganzer Zeitraum (alle Quartale)</option>
-        <option value="Q223">
-          Q223・April-Juni 2023・Sommersemester (aktuelles Quartal)
-        </option>
-        <option value="Q323">
-          Q323・Juli-September 2023・Sommersemester
-        </option>
-        <option value="Q423">
-          Q423・Oktober-Dezember 2023・Wintersemester
-        </option>
-        <option value="Q124">
-          Q124・Januar-März 2024・Wintersemester
-        </option>
-        <option value="Q224">
-          Q224・April-Juni 2024・Sommersemester
-        </option>
-        <option value="Q324">
-          Q324・Juli-September 2024・Sommersemester
-        </option>
-      </select>
+      <SelectQuarters onChange={handleQuarterChanged} />
       <div className="flex justify-center w-full" ref={divRef}>
         <svg
           ref={svgRef}

@@ -178,7 +178,7 @@ export default function Timeline({
           Q324・Juli-September 2024・Sommersemester
         </option>
       </select>
-      <div className="w-full" ref={divRef}>
+      <div className="flex justify-center w-full" ref={divRef}>
         <svg
           ref={svgRef}
           viewBox={`0 0 ${width} ${height}`}

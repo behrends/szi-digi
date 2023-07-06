@@ -1,39 +1,18 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import SelectQuarters from '@/components/SelectQuarters';
 import {
   calcDiffInWeeks,
   germanLocale,
-  getQuarterDates,
+  filterPeriods,
 } from '@/lib/utils.js';
 
 d3.timeFormatDefaultLocale(germanLocale);
 
-export default function Timeline({
-  courses,
-  data,
-  domainStart,
-  domainEnd,
-}) {
-  const [completeData] = useState(data);
-  const [currentData, setCurrentData] = useState(data);
-  const [allCourses] = useState(new Set(courses));
-  const [currentCourseNames, setCurrentCourseNames] = useState(
-    new Set(courses)
-  );
-  const [domainRange, setDomainRange] = useState({
-    start: domainStart,
-    end: domainEnd,
-  });
-  const [wholeRange] = useState({
-    start: domainStart,
-    end: domainEnd,
-  });
-
+export default function Timeline({ periodData, start, end }) {
+  const { periods, courses } = filterPeriods(periodData, start, end);
   const gx = useRef(),
     gy = useRef(),
-    todayLine = useRef(),
     divRef = useRef(),
     svgRef = useRef();
 
@@ -43,17 +22,16 @@ export default function Timeline({
     marginBottom = 30,
     marginLeft = 50;
 
-  const height =
-    currentCourseNames.size * 30 + marginTop + marginBottom;
+  const height = courses.size * 30 + marginTop + marginBottom;
 
   const x = d3
     .scaleUtc()
-    .domain([domainRange.start, domainRange.end])
+    .domain([start, end])
     .range([marginLeft, width - marginRight]);
 
   const y = d3
     .scaleBand()
-    .domain(currentCourseNames)
+    .domain(courses)
     .range([height - marginBottom, marginTop])
     .padding(0.08);
 
@@ -70,7 +48,7 @@ export default function Timeline({
 
     svg
       .selectAll('rect')
-      .data(currentData)
+      .data(periods)
       .join('rect')
       .attr('x', (d) => x(d.start))
       .attr('y', (d) => y(d.course))
@@ -108,8 +86,6 @@ export default function Timeline({
         tooltip.transition().duration(500).style('opacity', 0)
       );
 
-    d3.select(todayLine.current).raise(); // move todayLine to front
-
     d3.select(gx.current)
       .transition()
       .duration(300)
@@ -118,65 +94,21 @@ export default function Timeline({
       .transition()
       .duration(300)
       .call(d3.axisLeft(y));
-  }, [currentData, currentCourseNames, domainRange]);
-
-  function handleQuarterChanged(quarter) {
-    // determine data for selected quarter
-    const dates = getQuarterDates(quarter);
-    if (dates === null) {
-      setCurrentData(completeData);
-      setCurrentCourseNames(allCourses);
-      setDomainRange(wholeRange);
-      return;
-    }
-    let { start, end } = dates;
-    const newCourses = new Set();
-    const newData = completeData
-      .filter((item) => {
-        return (
-          (item.start >= start && item.start <= end) ||
-          (item.end >= start && item.end <= end) ||
-          (item.start <= start && item.end >= end)
-        );
-      })
-      .map((item) => {
-        newCourses.add(item.course);
-        const newItem = { ...item };
-        newItem.start =
-          newItem.start <= start ? start : newItem.start;
-        newItem.end = newItem.end >= end ? end : newItem.end;
-        return newItem;
-      });
-    setCurrentData(newData);
-    setCurrentCourseNames(newCourses);
-    setDomainRange({ start, end });
-  }
+  }, [periods, courses, start, end]);
 
   return (
-    <>
-      <SelectQuarters onChange={handleQuarterChanged} />
-      <div className="flex justify-center w-full" ref={divRef}>
-        <svg
-          ref={svgRef}
-          viewBox={`0 0 ${width} ${height}`}
-          style={{ maxHeight: '600px' }}
-        >
-          <line
-            ref={todayLine}
-            x1="100"
-            y1={0 + marginTop}
-            x2="100"
-            y2={height - marginBottom}
-            stroke="lightgreen"
-            strokeWidth="1.25"
-          />
-          <g
-            ref={gx}
-            transform={`translate(0,${height - marginBottom})`}
-          />
-          <g ref={gy} transform={`translate(${marginLeft},0)`} />
-        </svg>
-      </div>
-    </>
+    <div className="flex justify-center w-full" ref={divRef}>
+      <svg
+        ref={svgRef}
+        viewBox={`0 0 ${width} ${height}`}
+        style={{ maxHeight: '600px' }}
+      >
+        <g
+          ref={gx}
+          transform={`translate(0,${height - marginBottom})`}
+        />
+        <g ref={gy} transform={`translate(${marginLeft},0)`} />
+      </svg>
+    </div>
   );
 }

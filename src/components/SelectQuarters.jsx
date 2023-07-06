@@ -1,3 +1,4 @@
+'use client';
 export default function SelectQuarters({ onChange }) {
   return (
     <>
@@ -10,9 +11,6 @@ export default function SelectQuarters({ onChange }) {
         onChange={(event) => onChange(event.target.value)}
       >
         <option value="all">Ganzer Zeitraum (alle Quartale)</option>
-        <option value="Q223">
-          Q223・April-Juni 2023・Sommersemester (aktuelles Quartal)
-        </option>
         <option value="Q323">
           Q323・Juli-September 2023・Sommersemester
         </option>

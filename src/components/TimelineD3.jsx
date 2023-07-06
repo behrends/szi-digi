@@ -112,18 +112,18 @@ export default function Timeline({
           tooltip.transition().duration(200).style('opacity', 0.9);
           tooltip.html(
             `<div class='p-1 text-base text-center' style='width: 220px;'>
-            <p class='text-lg font-bold'>${start.toLocaleDateString(
-              'de',
-              { dateStyle: 'short' }
-            )}-${end.toLocaleDateString('de', {
+          <p class='text-lg font-bold'>${start.toLocaleDateString(
+            'de',
+            { dateStyle: 'short' }
+          )}-${end.toLocaleDateString('de', {
               dateStyle: 'short',
-            })}</p> 
-            <p class="text-lg">${semester}. Semester</p>
-            <p>${theory ? 'Theoriephase' : 'Praxisphase'}</p>
-            <p class="text-sm">${weeks} Wochen</p>
-            <p class="text-sm">${
-              remarks ? remarks.join('<br/>') : ''
-            }</p></div>`
+            })}</p>
+          <p class="text-lg">${semester}. Semester</p>
+          <p>${theory ? 'Theoriephase' : 'Praxisphase'}</p>
+          <p class="text-sm">${weeks} Wochen</p>
+          <p class="text-sm">${
+            remarks ? remarks.join('<br/>') : ''
+          }</p></div>`
           );
         }
       )
@@ -138,8 +138,14 @@ export default function Timeline({
 
     d3.select(todayLine.current).raise(); // move todayLine to front
 
-    d3.select(gx.current).call(d3.axisBottom(x));
-    d3.select(gy.current).call(d3.axisLeft(y));
+    d3.select(gx.current)
+      .transition()
+      .duration(300)
+      .call(d3.axisBottom(x));
+    d3.select(gy.current)
+      .transition()
+      .duration(300)
+      .call(d3.axisLeft(y));
   }, [currentData, currentCourseNames, domainRange]);
 
   return (

@@ -19,7 +19,7 @@ export default async function Page() {
 
   return (
     <Timeline
-      courses={courses}
+      courses={courses.map((course) => course.name)}
       data={data}
       domainStart={domainStart}
       domainEnd={domainEnd}

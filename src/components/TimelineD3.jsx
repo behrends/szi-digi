@@ -1,9 +1,42 @@
 'use client';
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { calcDiffInWeeks, germanLocale } from '@/lib/utils.js';
 
 d3.timeFormatDefaultLocale(germanLocale);
+
+function getQuarterDates(quarter) {
+  let start, end;
+  switch (quarter) {
+    case 'Q223':
+      start = new Date('2023-04-01T00:00:00');
+      end = new Date('2023-06-30T00:00:00');
+      break;
+    case 'Q323':
+      start = new Date('2023-06-30T00:00:00');
+      end = new Date('2023-09-30T00:00:00');
+      break;
+    case 'Q423':
+      start = new Date('2023-10-01T00:00:00');
+      end = new Date('2023-12-31T00:00:00');
+      break;
+    case 'Q124':
+      start = new Date('2024-01-01T00:00:00');
+      end = new Date('2024-03-31T00:00:00');
+      break;
+    case 'Q224':
+      start = new Date('2024-04-01T00:00:00');
+      end = new Date('2024-06-30T00:00:00');
+      break;
+    case 'Q324':
+      start = new Date('2024-07-01T00:00:00');
+      end = new Date('2024-09-30T00:00:00');
+      break;
+    default:
+      return null;
+  }
+  return { start, end };
+}
 
 export default function Timeline({
   courses,
@@ -11,6 +44,21 @@ export default function Timeline({
   domainStart,
   domainEnd,
 }) {
+  const [completeData] = useState(data);
+  const [currentData, setCurrentData] = useState(data);
+  const [allCourses] = useState(new Set(courses));
+  const [currentCourseNames, setCurrentCourseNames] = useState(
+    new Set(courses)
+  );
+  const [domainRange, setDomainRange] = useState({
+    start: domainStart,
+    end: domainEnd,
+  });
+  const [wholeRange] = useState({
+    start: domainStart,
+    end: domainEnd,
+  });
+
   const gx = useRef(),
     gy = useRef(),
     todayLine = useRef(),
@@ -23,17 +71,17 @@ export default function Timeline({
     marginBottom = 30,
     marginLeft = 50;
 
-  const height = courses.length * 30 + marginTop + marginBottom;
-  const courseNames = courses.map((course) => course.name);
+  const height =
+    currentCourseNames.size * 30 + marginTop + marginBottom;
 
   const x = d3
     .scaleUtc()
-    .domain([domainStart, domainEnd])
+    .domain([domainRange.start, domainRange.end])
     .range([marginLeft, width - marginRight]);
 
   const y = d3
     .scaleBand()
-    .domain(courseNames)
+    .domain(currentCourseNames)
     .range([height - marginBottom, marginTop])
     .padding(0.08);
 
@@ -50,7 +98,7 @@ export default function Timeline({
 
     svg
       .selectAll('rect')
-      .data(data)
+      .data(currentData)
       .join('rect')
       .attr('x', (d) => x(d.start))
       .attr('y', (d) => y(d.course))
@@ -82,7 +130,7 @@ export default function Timeline({
       .on('mousemove', (event) =>
         tooltip
           .style('left', `${event.pageX + 10}px`)
-          .style('top', `${event.pageY - 28}px`)
+          .style('top', `${event.pageY - 108}px`)
       )
       .on('mouseleave', () =>
         tooltip.transition().duration(500).style('opacity', 0)
@@ -92,30 +140,89 @@ export default function Timeline({
 
     d3.select(gx.current).call(d3.axisBottom(x));
     d3.select(gy.current).call(d3.axisLeft(y));
-  }, []);
+  }, [currentData, currentCourseNames, domainRange]);
 
   return (
-    <div className="flex w-full" ref={divRef}>
-      <svg
-        ref={svgRef}
-        viewBox={`0 0 ${width} ${height}`}
-        style={{ maxHeight: '600px' }}
+    <>
+      <label htmlFor="quarter" className="font-medium mr-2">
+        Zeige Kurse mit ihren Phasen in diesem Quartal:
+      </label>
+      <select
+        id="quarter"
+        className="select border-dhbwRed select-sm mb-4"
+        onChange={(e) => {
+          let dates = getQuarterDates(e.target.value);
+          if (dates === null) {
+            setCurrentData(completeData);
+            setCurrentCourseNames(allCourses);
+            setDomainRange(wholeRange);
+            return;
+          }
+          let { start, end } = dates;
+          const newCourses = new Set();
+          const newData = completeData
+            .filter((item) => {
+              return (
+                (item.start >= start && item.start <= end) ||
+                (item.end >= start && item.end <= end) ||
+                (item.start <= start && item.end >= end)
+              );
+            })
+            .map((item) => {
+              newCourses.add(item.course);
+              const newItem = { ...item };
+              newItem.start =
+                newItem.start <= start ? start : newItem.start;
+              newItem.end = newItem.end >= end ? end : newItem.end;
+              return newItem;
+            });
+          setCurrentData(newData);
+          setCurrentCourseNames(newCourses);
+          setDomainRange({ start, end });
+        }}
       >
-        <line
-          ref={todayLine}
-          x1="100"
-          y1={0 + marginTop}
-          x2="100"
-          y2={height - marginBottom}
-          stroke="lightgreen"
-          strokeWidth="1.25"
-        />
-        <g
-          ref={gx}
-          transform={`translate(0,${height - marginBottom})`}
-        />
-        <g ref={gy} transform={`translate(${marginLeft},0)`} />
-      </svg>
-    </div>
+        <option value="all">Ganzer Zeitraum (alle Quartale)</option>
+        <option value="Q223">
+          Q223・April-Juni 2023・Sommersemester (aktuelles Quartal)
+        </option>
+        <option value="Q323">
+          Q323・Juli-September 2023・Sommersemester
+        </option>
+        <option value="Q423">
+          Q423・Oktober-Dezember 2023・Wintersemester
+        </option>
+        <option value="Q124">
+          Q124・Januar-März 2024・Wintersemester
+        </option>
+        <option value="Q224">
+          Q224・April-Juni 2024・Sommersemester
+        </option>
+        <option value="Q324">
+          Q324・Juli-September 2024・Sommersemester
+        </option>
+      </select>
+      <div className="flex w-full" ref={divRef}>
+        <svg
+          ref={svgRef}
+          viewBox={`0 0 ${width} ${height}`}
+          style={{ maxHeight: '600px' }}
+        >
+          <line
+            ref={todayLine}
+            x1="100"
+            y1={0 + marginTop}
+            x2="100"
+            y2={height - marginBottom}
+            stroke="lightgreen"
+            strokeWidth="1.25"
+          />
+          <g
+            ref={gx}
+            transform={`translate(0,${height - marginBottom})`}
+          />
+          <g ref={gy} transform={`translate(${marginLeft},0)`} />
+        </svg>
+      </div>
+    </>
   );
 }

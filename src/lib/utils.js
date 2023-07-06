@@ -56,7 +56,7 @@ export function filterPeriods(data, start, end) {
   const periods = data
     .filter((item) => {
       return (
-        (item.start_date >= start && item.start <= end) ||
+        (item.start >= start && item.start <= end) ||
         (item.end >= start && item.end <= end) ||
         (item.start <= start && item.end >= end)
       );

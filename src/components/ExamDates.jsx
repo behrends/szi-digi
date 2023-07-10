@@ -25,6 +25,7 @@ export default function ExamDates({ examDates }) {
                     })}
               </td>
               <td dangerouslySetInnerHTML={{ __html: description }} />
+              {/* TODO: make sure sanitized data is stored in DB */}
             </tr>
           ))}
         </tbody>

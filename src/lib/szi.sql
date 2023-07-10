@@ -20,7 +20,7 @@ CREATE TABLE exam_dates(
     id bigint PRIMARY KEY,
     exam_date date NOT NULL,
     fixed boolean NOT NULL DEFAULT true,
-    duration smallint NOT NULL DEFAULT 1,
+    end_date date CHECK (end_date > exam_date),
     description varchar
 );
 
@@ -253,6 +253,24 @@ INSERT INTO periods VALUES (65,7,6,true,'2024-01-08','2024-03-31', '{"Seminararb
 INSERT INTO periods VALUES (66,7,6,false,'2024-04-01','2024-09-22', '{"Bachelorarbeit"}');
 INSERT INTO periods VALUES (67,7,6,true,'2024-09-23','2024-09-27', '{"Bachelorprüfung"}');
 
+-- Exam dates
+INSERT INTO exam_dates (id, exam_date, description) VALUES (29, '2023-10-02', 'Abgabe 2. Projektarbeit (12 Uhr)<br/>Abgabe Reflexionsbericht, Ablaufplan');
+INSERT INTO exam_dates (id, exam_date, fixed, description) VALUES (30, '2023-11-01', false, 'Präsentation 2. Projektarbeit');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (31, '2024-03-29', 'Spätester Termin zu Abgabe der Seminararbeit (12 Uhr)');
+INSERT INTO exam_dates (id, exam_date, fixed, description) VALUES (32, '2024-02-01', false, 'Vorbereitung/Briefing Bachelorarbeit');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (33, '2024-06-10', 'Anmeldung Bachelorarbeit (12 Uhr)');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (34, '2024-09-02', 'Abgabe Bachelorarbeit (12 Uhr)<br/>Abgabe Reflexionsbericht, Ablaufplan');
+INSERT INTO exam_dates (id, exam_date, end_date, description) VALUES (35, '2024-09-23', '2024-09-27', 'Mündliche Bachelor-Prüfung');
+
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (7, 29);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (7, 30);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (7, 31);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (7, 32);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (7, 33);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (7, 34);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (7, 35);
+
+
 -- WWI22B --> mit WWI22A zusammengelegt
 -- WWI22A: id=8
 -- 2. Semester
@@ -270,6 +288,30 @@ INSERT INTO periods VALUES (75,8,5,false,'2024-12-23','2025-01-05', null);
 -- 6. Semester
 INSERT INTO periods VALUES (76,8,6,true,'2025-01-06','2025-03-30', null);
 INSERT INTO periods VALUES (77,8,6,false,'2025-03-31','2025-09-30', '{"Bachelorarbeit"}');
+
+-- Exam dates
+INSERT INTO exam_dates (id, exam_date, description) VALUES (36, '2023-10-02', 'Abgabe 1. Projektarbeit<br/>Abgabe Reflexionsbericht, Ablaufplan');
+INSERT INTO exam_dates (id, exam_date, fixed, description) VALUES (37, '2024-06-01', false, 'Vorbereitung/Briefing 2. Projektarbeit');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (38, '2024-07-08', 'Anmeldung 2. Projektarbeit');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (39, '2024-09-30', 'Abgabe 2. Projektarbeit<br/>Abgabe Reflexionsbericht, Ablaufplan');
+INSERT INTO exam_dates (id, exam_date, fixed, description) VALUES (40, '2024-11-01', false, 'Präsentation 2. Projektarbeit');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (41, '2025-03-30', 'Abgabe der Seminararbeit');
+INSERT INTO exam_dates (id, exam_date, fixed, description) VALUES (42, '2025-03-01', false, 'Vorbereitung/Briefing Bachelorarbeit');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (43, '2025-06-09', 'Anmeldung Bachelorarbeit');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (44, '2025-09-01', 'Abgabe Bachelorarbeit<br/>Abgabe Reflexionsbericht, Ablaufplan');
+INSERT INTO exam_dates (id, exam_date, end_date, description) VALUES (45, '2025-09-22', '2025-09-25', 'Mündliche Bachelor-Prüfung');
+
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (8, 36);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (8, 37);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (8, 38);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (8, 39);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (8, 40);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (8, 41);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (8, 42);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (8, 43);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (8, 44);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (8, 45);
+
 
 -- WWI23A: id=10
 -- 1. Semester
@@ -291,6 +333,34 @@ INSERT INTO periods VALUES (87,10,5,false,'2025-12-22','2026-01-11', null);
 INSERT INTO periods VALUES (88,10,6,true,'2026-01-12','2026-04-05', null);
 INSERT INTO periods VALUES (89,10,6,false,'2026-04-06','2026-09-30', '{"Bachelorarbeit"}');
 
+-- Exam dates
+INSERT INTO exam_dates (id, exam_date, description) VALUES (46, '2024-07-15', 'Anmeldung 1. Projektarbeit');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (47, '2024-07-15', 'Mitteilung des gewünschten Schwerpunktes');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (48, '2024-09-30', 'Abgabe 1. Projektarbeit<br/>Abgabe Reflexionsbericht, Ablaufplan');
+INSERT INTO exam_dates (id, exam_date, fixed, description) VALUES (49, '2025-06-01', false, 'Vorbereitung/Briefing 2. Projektarbeit');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (50, '2025-07-07', 'Anmeldung 2. Projektarbeit');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (51, '2025-09-29', 'Abgabe 2. Projektarbeit<br/>Abgabe Reflexionsbericht, Ablaufplan');
+INSERT INTO exam_dates (id, exam_date, fixed, description) VALUES (52, '2025-11-01', false, 'Präsentation 2. Projektarbeit');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (53, '2026-04-03', 'Abgabe der Seminararbeit');
+INSERT INTO exam_dates (id, exam_date, fixed, description) VALUES (54, '2026-03-01', false, 'Vorbereitung/Briefing Bachelorarbeit');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (55, '2026-06-15', 'Anmeldung Bachelorarbeit');
+INSERT INTO exam_dates (id, exam_date, description) VALUES (56, '2026-09-07', 'Abgabe Bachelorarbeit<br/>Abgabe Reflexionsbericht, Ablaufplan');
+INSERT INTO exam_dates (id, exam_date, end_date, description) VALUES (57, '2026-09-21', '2026-09-24', 'Mündliche Bachelor-Prüfung');
+
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (10, 46);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (10, 47);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (10, 48);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (10, 49);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (10, 50);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (10, 51);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (10, 52);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (10, 53);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (10, 54);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (10, 55);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (10, 56);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (10, 57);
+
+
 -- WWI23B: id=11
 INSERT INTO periods VALUES (90,11,1,false,'2023-10-01','2024-01-07', null);
 INSERT INTO periods VALUES (91,11,1,true,'2024-01-08','2024-03-31', null);
@@ -310,6 +380,20 @@ INSERT INTO periods VALUES (100,11,5,false,'2025-12-22','2026-01-11', null);
 -- 6. Semester
 INSERT INTO periods VALUES (101,11,6,true,'2026-01-12','2026-04-05', null);
 INSERT INTO periods VALUES (102,11,6,false,'2026-04-06','2026-09-30', '{"Bachelorarbeit"}');
+
+-- Exam dates (wie bei WWI23A s.o.)
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (11, 46);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (11, 47);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (11, 48);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (11, 49);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (11, 50);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (11, 51);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (11, 52);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (11, 53);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (11, 54);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (11, 55);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (11, 56);
+INSERT INTO courses_exam_dates (course_id, exam_date_id) VALUES (11, 57);
 
 -- TEST
 -- SELECT * FROM courses c, periods p WHERE c.id=p.course_id;

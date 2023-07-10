@@ -25,6 +25,13 @@ export const getCoursesAndPeriodsByName = cache(async (name) => {
   return rows;
 });
 
+export const getExamDatesByName = cache(async (name) => {
+  const { rows } =
+    await sql`SELECT * FROM exam_dates d, courses_exam_dates cd WHERE d.id=cd.exam_date_id AND cd.course_id=(SELECT id FROM courses WHERE name=${name}) ORDER BY d.exam_date ASC`;
+  if (rows.length === 0) return undefined;
+  return rows;
+});
+
 export const getMaxPeriodEnd = cache(async () => {
   const { rows } = await sql`SELECT MAX(end_date) FROM periods;`;
   return rows[0].max;

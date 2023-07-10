@@ -6,11 +6,15 @@ import {
 } from '@heroicons/react/24/outline';
 import ExamDates from '@/components/ExamDates';
 import { calcDiffInWeeks } from '@/lib/utils';
-import { getCoursesAndPeriodsByName } from '@/lib/queries';
+import {
+  getCoursesAndPeriodsByName,
+  getExamDatesByName,
+} from '@/lib/queries';
 
 export default async function Course({ params }) {
   const courseName = params.course;
   const periods = await getCoursesAndPeriodsByName(courseName);
+  const examDates = await getExamDatesByName(courseName);
 
   // this will show the 404 page
   if (!periods) notFound(); // implicit return
@@ -116,7 +120,7 @@ export default async function Course({ params }) {
           </tr>
         </tfoot>
       </table>
-      <ExamDates course={courseName} />
+      {examDates && <ExamDates examDates={examDates} />}
     </>
   );
 }

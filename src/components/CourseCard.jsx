@@ -6,7 +6,7 @@ export default function CourseCard({ course, color }) {
   return (
     <Link href={`/courses/${course.name}`} key={course.name}>
       <div
-        className={`card p-2 mb-2 mr-2 justify-center items-start shadow-xl cursor-pointer border-2 text-${color} ${hoverColor}`}
+        className={`card p-2 justify-center items-start shadow-xl cursor-pointer border-2 text-${color} ${hoverColor}`}
       >
         <div className="card-title text-xs">{course.name}</div>
       </div>

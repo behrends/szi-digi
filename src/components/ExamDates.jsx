@@ -10,6 +10,7 @@ export default function ExamDates({ examDates }) {
         zur Anmeldung und zur Abgabe (jeweils bis spätestens 12:00
         Uhr).
       </p>
+      <p className="text-blue-500">TODO: Nur zukünftige Termine zeigen, vergangene auf Wunsch einblenden</p>
       <table className="table table-xs w-3/4">
         <tbody>
           {examDates.map(({ id, description, exam_date, fixed }) => (

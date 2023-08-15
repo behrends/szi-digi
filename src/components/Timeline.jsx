@@ -101,7 +101,7 @@ export default function Timeline({ periodData, start, end }) {
       <svg
         ref={svgRef}
         viewBox={`0 0 ${width} ${height}`}
-        style={{ maxHeight: '600px' }}
+        style={{ width: `${width}px`, maxHeight: '600px' }}
       >
         <g
           ref={gx}

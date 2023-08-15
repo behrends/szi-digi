@@ -58,7 +58,7 @@ export default async function Course({ params }) {
           <tr
             className={`${
               periods.length === rowNum + 1
-                ? 'border-slate-300'
+                ? 'border-b border-slate-300'
                 : 'border-none'
             } ${highlighted}`}
           >
@@ -101,12 +101,18 @@ export default async function Course({ params }) {
         </a>
       </p>
       <h2 className="text-3xl">Blockplan</h2>
-      <table className="table table-xs text-lg w-3/4">
-        <thead className="text-lg">
-          <tr className="border-0">
+      <table className="table-auto text-lg w-3/4">
+        <thead className="text-lg text-dhbwGrey">
+          <tr className="border-none">
             <th>Semester</th>
-            <th>Studium an der Dualen Hochschule</th>
-            <th>Ausbildung im Unternehmen / Urlaub</th>
+            <th className="hidden lg:table-cell">
+              Studium an der DHBW
+            </th>
+            <th className="lg:hidden table-cell">DHBW</th>
+            <th className="hidden lg:table-cell">
+              Ausbildung im Unternehmen / Urlaub
+            </th>
+            <th className="lg:hidden table-cell">Unternehmen</th>
             <th>Hinweise</th>
           </tr>
         </thead>

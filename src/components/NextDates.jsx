@@ -5,23 +5,31 @@ export default function NextDates({ dates }) {
         Termine in den nächsten drei Monaten
       </div>
       <table className="table table-xs">
-        {dates.map(
-          ({ exam_date, exam_date_id, description, name }) => {
-            return (
-              <tr key={exam_date_id}>
-                <td>
-                  {`${exam_date.toLocaleDateString('de', {
-                    dateStyle: 'short',
-                  })}`}
-                </td>
-                <td>{name}</td>
-                <td
-                  dangerouslySetInnerHTML={{ __html: description }}
-                />
-              </tr>
-            );
-          }
-        )}
+        <tbody>
+          {dates.map(
+            ({
+              course_id,
+              exam_date,
+              exam_date_id,
+              description,
+              name,
+            }) => {
+              return (
+                <tr key={`${course_id}-${exam_date_id}`}>
+                  <td>
+                    {`${exam_date.toLocaleDateString('de', {
+                      dateStyle: 'short',
+                    })}`}
+                  </td>
+                  <td>{name}</td>
+                  <td
+                    dangerouslySetInnerHTML={{ __html: description }}
+                  />
+                </tr>
+              );
+            }
+          )}
+        </tbody>
       </table>
     </div>
   );

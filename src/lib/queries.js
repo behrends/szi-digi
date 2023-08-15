@@ -36,3 +36,10 @@ export const getMaxPeriodEnd = cache(async () => {
   const { rows } = await sql`SELECT MAX(end_date) FROM periods;`;
   return rows[0].max;
 });
+
+export const getExamDates = cache(async () => {
+  const { rows } =
+    await sql`SELECT * FROM exam_dates d, courses_exam_dates cd, courses c WHERE d.id=cd.exam_date_id AND cd.course_id=c.id AND d.exam_date BETWEEN CURRENT_DATE AND  (CURRENT_DATE + INTERVAL '3 months') ORDER BY d.exam_date ASC`;
+  if (rows.length === 0) return undefined;
+  return rows;
+});

@@ -1,5 +1,6 @@
 import { sql } from "@vercel/postgres";
 // import { unstable_noStore as noStore } from "next/cache";
+// https://nextjs.org/docs/app/api-reference/functions/unstable_noStore
 
 export const getCourses = async () => {
   // noStore();

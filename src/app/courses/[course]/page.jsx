@@ -1,15 +1,12 @@
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import {
   ArrowTopRightOnSquareIcon,
   HomeModernIcon,
-} from '@heroicons/react/24/outline';
-import ExamDates from '@/components/ExamDates';
-import { calcDiffInWeeks } from '@/lib/utils';
-import {
-  getCoursesAndPeriodsByName,
-  getExamDatesByName,
-} from '@/lib/queries';
+} from "@heroicons/react/24/outline";
+import ExamDates from "@/components/ExamDates";
+import { calcDiffInWeeks } from "@/lib/utils";
+import { getCoursesAndPeriodsByName, getExamDatesByName } from "@/lib/queries";
 
 export default async function Course({ params }) {
   const courseName = params.course;
@@ -41,30 +38,28 @@ export default async function Course({ params }) {
         const weeks = calcDiffInWeeks(start_date, end_date);
         if (theory) sumTheoryWeeks += weeks;
         else sumPracticeWeeks += weeks;
-        const timespan = `${start_date.toLocaleDateString('de', {
-          dateStyle: 'short',
-        })}-${end_date.toLocaleDateString('de', {
-          dateStyle: 'short',
+        const timespan = `${start_date.toLocaleDateString("de", {
+          dateStyle: "short",
+        })}-${end_date.toLocaleDateString("de", {
+          dateStyle: "short",
         })} (${weeks} Wochen)`;
         let theoryDates, practiceDates;
         if (theory) theoryDates = timespan;
         else practiceDates = timespan;
         // current period is highlighted
         const highlighted =
-          start_date <= today && today <= end_date
-            ? 'bg-yellow-100'
-            : null;
+          start_date <= today && today <= end_date ? "bg-yellow-100" : null;
         return (
           <tr
             className={`${
               periods.length === rowNum + 1
-                ? 'border-b border-slate-300'
-                : 'border-none'
+                ? "border-b border-slate-300"
+                : "border-none"
             } ${highlighted}`}
           >
             {rowNum === 0 && (
               <td
-                className="text-lg font-bold text-center bg-white"
+                className="bg-white text-center text-lg font-bold"
                 rowSpan={periods.length}
               >
                 {semester}
@@ -78,41 +73,39 @@ export default async function Course({ params }) {
             </td>
           </tr>
         );
-      })
+      }),
   );
 
   return (
     <>
       <Link href="/">
         <HomeModernIcon
-          className="absolute top-4 left-4 h-6 w-6 
+          className="absolute left-4 top-4 h-6 w-6 
       text-dhbwRed"
         />
       </Link>
       <h1 className="text-4xl text-dhbwRed">{periods[0].name}</h1>
       <p className="mb-4">
         <a
-          className="text-dhbwRed flex"
+          className="flex text-dhbwRed"
           href={`https://webmail.dhbw-loerrach.de/owa/calendar/kal-${courseCalName.toLowerCase()}@dhbw-loerrach.de/Kalender/calendar.html`}
           target="_blank"
         >
           Vorlesungskalender öffnen
-          <ArrowTopRightOnSquareIcon className="w-4 ml-1" />
+          <ArrowTopRightOnSquareIcon className="ml-1 w-4" />
         </a>
       </p>
       <h2 className="text-3xl">Blockplan</h2>
-      <table className="table-auto text-lg w-3/4">
+      <table className="w-3/4 table-auto text-lg">
         <thead className="text-lg text-dhbwGrey">
           <tr className="border-none">
             <th>Semester</th>
-            <th className="hidden lg:table-cell">
-              Studium an der DHBW
-            </th>
-            <th className="lg:hidden table-cell">DHBW</th>
+            <th className="hidden lg:table-cell">Studium an der DHBW</th>
+            <th className="table-cell lg:hidden">DHBW</th>
             <th className="hidden lg:table-cell">
               Ausbildung im Unternehmen / Urlaub
             </th>
-            <th className="lg:hidden table-cell">Unternehmen</th>
+            <th className="table-cell lg:hidden">Unternehmen</th>
             <th>Hinweise</th>
           </tr>
         </thead>

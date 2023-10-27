@@ -33,7 +33,7 @@ export default async function Page() {
         <CourseLinks courses={courses} />
         <NextDates dates={nextDates} />
       </div>
-      <p className="w-full text-right text-xs text-slate-300">v0.3</p>
+      <p className="w-full text-right text-xs text-slate-300">v0.4</p>
     </>
   );
 }

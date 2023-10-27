@@ -1,6 +1,8 @@
 import { sql } from "@vercel/postgres";
+import { unstable_noStore as noStore } from "next/cache";
 
 export const getCourses = async () => {
+  noStore();
   const { rows } = await sql`SELECT * FROM courses ORDER BY name;`;
   return rows;
 };

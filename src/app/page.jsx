@@ -2,7 +2,6 @@ import CourseLinks from "@/components/CourseLinks";
 import PeriodsChart from "@/components/PeriodsChart";
 import NextDates from "@/components/NextDates";
 import {
-  preload,
   getCourses,
   getCoursesAndPeriods,
   getExamDates,
@@ -10,7 +9,6 @@ import {
 } from "@/lib/queries";
 
 export default async function Page() {
-  preload();
   // TODO load data at build time (changes infrequently)?
   const courses = await getCourses();
   const coursesAndPeriods = await getCoursesAndPeriods();
